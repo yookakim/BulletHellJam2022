@@ -16,7 +16,35 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 96b6cfd001a5b4242abeb894bb387022
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: b25733935d25b774ba9ae8dd16039ec8
+    m_Address: Assets/Scenes/MainMenu.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0f42b0c12df186543b136ce86a391f97
+    m_Address: Assets/Scenes/GameplayScene.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f3eeca65fcdf84449aeeb4ce5b256532
+    m_Address: Assets/Scenes/Initialization.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1675f00d6d08e9b4b8e44f5e259a242b
+    m_Address: Assets/Scenes/PersistentManagersScene.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5a560b572f401ae43b003d611b1b2f0d
+    m_Address: Assets/Scenes/GameManagersScene.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e3f6c827042f4bf4595e8b457b0dc228
+    m_Address: Assets/ScriptableObjects/SceneData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 843f6cd89cf7eef4c968d566a6b7983f
+    m_Address: Assets/ScriptableObjects/GameEvents
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 76dfedf4846dd1242a70cee5e44f2d95, type: 2}
   m_SchemaSet:
