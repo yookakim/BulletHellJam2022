@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: bottom center 2
+  m_Script: {fileID: 11500000, guid: ecb1db7012407fa498703c098010b760, type: 3}
+  m_Name: dirttile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 6e19a5c7365d14c42bbf55d1f8f855ed, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 0.7830189, g: 0.4222548, b: 0, a: 1}
   m_Transform:
     e00: 1
     e01: 0
@@ -31,6 +31,6 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 0}
+  m_InstancedGameObject: {fileID: 5157952307921053476, guid: 0ac2c2a4e4b3f4a459a8b6b8cd400e29, type: 3}
   m_Flags: 1
   m_ColliderType: 0
