@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055073ef9a003044e8161ca5a345ed8b, type: 3}
   m_Name: StarterBombData
   m_EditorClassIdentifier: 
-  bombExplosionRadius: 3
+  bombExplosionRadius: 4
   bombExplosionStrength: 1
   bombTickDownTime: 3
   timeToDestroyAfterExplosion: 1
