@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 public class TilemapManager : MonoBehaviour
 {
 	[SerializeField] private Tilemap terrainTilemap;
+	[SerializeField] private Tilemap terrainRoofTilemap;
 
 	private void Awake()
 	{
@@ -17,10 +18,22 @@ public class TilemapManager : MonoBehaviour
 		GameObject tileObjectToRemove = terrainTilemap.GetInstantiatedObject(tilePosition);
 
 
-		DelayedDestroy(tileObjectToRemove, tilePosition);
+		StartCoroutine(DelayedDestroy(tileObjectToRemove, tilePosition));
 		Destroy(tileObjectToRemove);
 
 		// terrainTilemap.SetTile(tilePosition, null);
+	}
+
+	public void RemoveTileBlock(BoundsInt boundsToRemove)
+	{
+		BoundsInt.PositionEnumerator positionsToRemove = boundsToRemove.allPositionsWithin;
+		// StartCoroutine(DelayedDestroyBlock(boundsToRemove));
+		foreach (Vector3Int position in positionsToRemove)
+		{
+			RemoveTile(position);
+			// GameObject tileObjectToRemove = terrainTilemap.GetInstantiatedObject(position);
+			// Destroy(tileObjectToRemove);
+		}
 	}
 
 	private IEnumerator DelayedDestroy(GameObject objectToRemove, Vector3Int tilePosition)
@@ -28,5 +41,14 @@ public class TilemapManager : MonoBehaviour
 		yield return new WaitForEndOfFrame();
 		// Destroy(objectToRemove);
 		terrainTilemap.SetTile(tilePosition, null);
+		terrainRoofTilemap.SetTile(tilePosition, null);
+	}
+
+	private IEnumerator DelayedDestroyBlock(BoundsInt boundsToRemove)
+	{
+		yield return new WaitForEndOfFrame();
+
+		terrainTilemap.SetTilesBlock(boundsToRemove, null);
+		terrainRoofTilemap.SetTilesBlock(boundsToRemove, null);
 	}
 }

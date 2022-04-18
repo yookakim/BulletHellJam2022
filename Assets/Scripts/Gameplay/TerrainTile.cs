@@ -10,17 +10,20 @@ public class TerrainTile : MonoBehaviour
 
 	private void Awake()
 	{
-		// Debug.Log(transform.parent);
-		// tilemapManager = transform.parent.GetComponentInParent<TilemapManager>();
+		
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		// Debug.Log(TilemapManager);
-		DestroyTile();
+		// DestroyTile();
+	}
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		// DestroyTile();
 	}
 
-	private void DestroyTile()
+	public void DestroyTile()
 	{
 		TilemapManager.RemoveTile(TilePosition);
 	}

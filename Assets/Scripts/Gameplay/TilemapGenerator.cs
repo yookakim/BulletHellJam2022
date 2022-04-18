@@ -15,18 +15,23 @@ public class TilemapGenerator : MonoBehaviour
 	[SerializeField] private int minimumDistanceBetweenRooms;
 	[SerializeField] private float potentialRoomLocationThreshold;
 
+	[SerializeField] private TileBase mapEdgeTile;
 	[SerializeField] private TileBase testTile;
+	[SerializeField] private TileBase testRoofTile;
 	[SerializeField] private TileBase groundTile;
-	[SerializeField] private TileBase roundRoomCenterTile;
+	[SerializeField] private TileBase potentialRoomLocationTile;
 	[SerializeField] private TileBase roomCenterConfirmedTile;
+
+	[SerializeField] private TilemapManager tilemapManager;
+	[SerializeField] private Tilemap terrainRoofTilemap;
 	[SerializeField] private Tilemap groundTilemap; // tilemap for the ground that player walks on
 	[SerializeField] private Tilemap terrainTilemap; // tilemap for actual walls/blocks that player interacts with
 
+	[SerializeField] private Tilemap roomTilemapPrefab;
 	[SerializeField] private Transform testPlayerTransform;
 
 	private float randomSeed;
 	private int nextChunkY;
-	private float noiseShiftX;
 	private Dictionary<Vector3Int, TileBase> generatedRooms;
 	private PotentialRoomLocationComparer potentialRoomLocationComparer;
 
@@ -36,25 +41,32 @@ public class TilemapGenerator : MonoBehaviour
 
 		randomSeed = Random.Range(0, 1000000);
 		// Debug.Log(randomSeed);
-		nextChunkY = 0;
-		noiseShiftX = 0;
+		nextChunkY = 16;
 		generatedRooms = new Dictionary<Vector3Int, TileBase>();
 		potentialRoomLocationComparer = new PotentialRoomLocationComparer();
 		// GenerateRandomArea();
 		// GenerateRandomAreaUsingNoise();
+		GenerateStartingArea();
 	}
 
 	private void Update()
 	{
-		if (Input.GetKeyDown("r"))
-		{
-			GenerateRandomAreaUsingNoise();
-		}
 
 		// if Y of player is less than 24 from last generated chunk Y, generate chunk
 		if (testPlayerTransform.position.y >= nextChunkY - 32)
 		{
 			GenerateNextChunk();
+		}
+	}
+
+	private void GenerateStartingArea()
+	{
+		for (int i = -tilemapWidth / 2; i < tilemapWidth / 2; i++)
+		{
+			for (int j = -chunkHeight / 2; j < chunkHeight; j++)
+			{
+				groundTilemap.SetTile(new Vector3Int(i, j, 0), groundTile);
+			}
 		}
 	}
 
@@ -65,37 +77,6 @@ public class TilemapGenerator : MonoBehaviour
 			for (int j = -chunkHeight / 2; j < chunkHeight / 2; j++)
 			{
 				groundTilemap.SetTile(new Vector3Int(i, j, 0), testTile);
-			}
-		}
-	}
-
-	private void GenerateRandomAreaUsingNoise()
-	{
-		Debug.Log(Time.time);
-		groundTilemap.ClearAllTiles();
-		for (int i = -tilemapWidth / 2; i < tilemapWidth / 2; i++)
-		{
-			for (int j = -chunkHeight / 2; j < chunkHeight / 2; j++)
-			{
-				// divide by th
-				float inputX = 0.5f + i / (float)tilemapWidth;
-				float inputY = 0.5f + j / (float)chunkHeight;
-				float noiseResult = Mathf.PerlinNoise(inputX * noiseXScale, (inputY * noiseYScale) + Time.time);
-				Debug.Log("noise input " + inputX + ", " + inputY + ", noise result: " + noiseResult);
-				if (noiseResult >= addTileNoiseOutputThreshold)
-				{
-
-					groundTilemap.SetTile(new Vector3Int(i, j, 0), testTile);
-				}
-				else
-				{
-					groundTilemap.SetTile(new Vector3Int(i, j, 0), null);
-				}
-
-				if (noiseResult >= potentialRoomLocationThreshold)
-				{
-					groundTilemap.SetTile(new Vector3Int(i, j, 0), roundRoomCenterTile);
-				}
 			}
 		}
 	}
@@ -115,7 +96,11 @@ public class TilemapGenerator : MonoBehaviour
 	{
 		int chunkLowerY = nextChunkY - (chunkHeight / 2);
 		int chunkUpperY = nextChunkY + (chunkHeight / 2);
-
+		for (int i = 0; i < chunkHeight; i++)
+		{
+			terrainTilemap.SetTile(new Vector3Int(-tilemapWidth / 2 - 1, chunkLowerY + i, 0), mapEdgeTile);
+			terrainTilemap.SetTile(new Vector3Int(tilemapWidth / 2, chunkLowerY + i, 0), mapEdgeTile);
+		}
 		List<PotentialRoomLocation> potentialRoomLocations = new List<PotentialRoomLocation>();
 
 		for (int i = -tilemapWidth / 2; i < tilemapWidth / 2; i++)
@@ -133,23 +118,24 @@ public class TilemapGenerator : MonoBehaviour
 				float noiseResult = 
 					Mathf.PerlinNoise(inputX * noiseXScale, (inputY * noiseYScale) + randomSeed + offset * noiseYScale);
 				// Debug.Log("noise input " + inputX + ", " + inputY + ", noise result: " + noiseResult);
-				if (noiseResult >= addTileNoiseOutputThreshold)
+				if (noiseResult >= addTileNoiseOutputThreshold && noiseResult <= potentialRoomLocationThreshold)
 				{
 					// Debug.Log("hmmmm");
+					terrainRoofTilemap.SetTile(new Vector3Int(i, j, 0), testRoofTile);
 					terrainTilemap.SetTile(new Vector3Int(i, j, 0), testTile);
 				}
 				else
 				{
-					terrainTilemap.SetTile(new Vector3Int(i, j, 0), null);
+					// terrainTilemap.SetTile(new Vector3Int(i, j, 0), null);
 				}
 
 				if (noiseResult >= potentialRoomLocationThreshold)
 				{
-					terrainTilemap.SetTile(new Vector3Int(i, j, 0), roundRoomCenterTile);
+					// terrainTilemap.SetTile(new Vector3Int(i, j, 0), potentialRoomLocationTile);
+					// tilemapManager.RemoveTile()
+					// PotentialRoomLocation potentialLocation = new PotentialRoomLocation(new Vector3Int(i, j, 0), noiseResult);
 
-					PotentialRoomLocation potentialLocation = new PotentialRoomLocation(new Vector3Int(i, j, 0), noiseResult);
-
-					potentialRoomLocations.Add(potentialLocation);
+					// potentialRoomLocations.Add(potentialLocation);
 				}
 			}
 		}
@@ -176,6 +162,21 @@ public class TilemapGenerator : MonoBehaviour
 		{
 			if (!ConfirmedRoomExistsNearby(potentialRoomLocations[i].gridPosition))
 			{
+				/*
+				Debug.Log(roomTilemapPrefab.cellBounds.xMin);
+				roomTilemapPrefab.CompressBounds();
+				TileBase[] roomTileArray = roomTilemapPrefab.GetTilesBlock(roomTilemapPrefab.cellBounds);
+
+				BoundsInt newRoomBounds = roomTilemapPrefab.cellBounds;
+				newRoomBounds.position = potentialRoomLocations[i].gridPosition;
+
+				tilemapManager.RemoveTileBlock(newRoomBounds);
+				terrainTilemap.SetTilesBlock(newRoomBounds, roomTileArray);
+
+				newRoomBounds.position = new Vector3Int(newRoomBounds.position.x, newRoomBounds.position.y + 1, 0);
+				// terrainRoofTilemap.SetTilesBlock
+				*/
+
 				terrainTilemap.SetTile(potentialRoomLocations[i].gridPosition, roomCenterConfirmedTile);
 				generatedRooms.Add(potentialRoomLocations[i].gridPosition, roomCenterConfirmedTile);
 				Debug.Log("Room successfully generated. Current room count: " + generatedRooms.Count);
@@ -198,7 +199,7 @@ public class TilemapGenerator : MonoBehaviour
 			{
 				if (generatedRooms.ContainsKey(new Vector3Int(i, j, 0)))
 				{
-					Debug.Log("Attempted to generate room but room already existed nearby");
+					// Debug.Log("Attempted to generate room but room already existed nearby");
 					// Debug.Log(generatedRooms.Count);
 					return true;
 				}

@@ -31,8 +31,6 @@ public class DirtTileData : Tile
 
 	public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
 	{
-		Debug.Log("startup");
-
 		if (go != null)
 		{
 			TerrainTile thisTile = go.GetComponent<TerrainTile>();
