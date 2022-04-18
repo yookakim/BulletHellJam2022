@@ -377,7 +377,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.6666667, y: 1}
+    m_SensorSize: {x: 1.1480865, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -523,8 +523,9 @@ GameObject:
   - component: {fileID: 317685602}
   - component: {fileID: 317685601}
   - component: {fileID: 317685603}
+  - component: {fileID: 317685604}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: TileGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -576,7 +577,7 @@ MonoBehaviour:
   noiseXScale: 2
   noiseYScale: 2
   offsetMultiplier: 0.010101011
-  addTileNoiseOutputThreshold: 0.4
+  addTileNoiseOutputThreshold: 0.5
   minimumDistanceBetweenRooms: 12
   potentialRoomLocationThreshold: 0.7
   testTile: {fileID: 11400000, guid: 6362aa04f4120da4a98f559628c03a9f, type: 2}
@@ -586,6 +587,19 @@ MonoBehaviour:
   groundTilemap: {fileID: 29846601}
   terrainTilemap: {fileID: 797249300}
   testPlayerTransform: {fileID: 1830629109}
+--- !u!114 &317685604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317685600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec8f65626a8074479870a111c9553f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainTilemap: {fileID: 797249300}
 --- !u!1 &455440270
 GameObject:
   m_ObjectHideFlags: 0

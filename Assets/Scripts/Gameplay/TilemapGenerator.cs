@@ -135,7 +135,7 @@ public class TilemapGenerator : MonoBehaviour
 				// Debug.Log("noise input " + inputX + ", " + inputY + ", noise result: " + noiseResult);
 				if (noiseResult >= addTileNoiseOutputThreshold)
 				{
-
+					// Debug.Log("hmmmm");
 					terrainTilemap.SetTile(new Vector3Int(i, j, 0), testTile);
 				}
 				else
