@@ -7,5 +7,5 @@ public abstract class WeaponData : ScriptableObject
     public GameObject projectilePrefab;
     public float useRate;
 
-    public abstract void UseWeapon(PlayerWeaponController weaponController);
+    public abstract void UseWeapon(WeaponController weaponController);
 }

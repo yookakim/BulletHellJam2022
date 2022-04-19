@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+	[SerializeField] private TransformReference playerTransformReference;
+
 	private PlayerInputController inputController;
 	private Movement movement;
 	private Health health;
 	private PlayerBombLauncher bombLauncher;
-	private PlayerWeaponController weaponController;
+	private WeaponController weaponController;
 
 	private void Awake()
 	{
@@ -16,7 +18,9 @@ public class Player : MonoBehaviour
 		movement = GetComponent<Movement>();
 		health = GetComponent<Health>();
 		bombLauncher = GetComponent<PlayerBombLauncher>();
-		weaponController = GetComponent<PlayerWeaponController>();
+		weaponController = GetComponent<WeaponController>();
+
+		playerTransformReference.reference = transform;
 	}
 
 	private void Update()

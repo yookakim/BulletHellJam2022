@@ -16,8 +16,8 @@ TagManager:
   - Bomb
   - Projectile
   - Hitbox
-  - 
-  - 
+  - Enemy
+  - MapEdgeTile
   - 
   - 
   - 

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6435513250006416297}
   - component: {fileID: 6435513250006416298}
   - component: {fileID: 2696592052501711285}
+  - component: {fileID: 6247118325087735762}
   m_Layer: 9
   m_Name: RevolverBullet
   m_TagString: Untagged
@@ -137,3 +138,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileData: {fileID: 11400000, guid: 08cb8ce387b18374e8ade4c9a269e90d, type: 2}
+  projectileDamageComponent: {fileID: 6247118325087735762}
+--- !u!114 &6247118325087735762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6435513250006416299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03008d3ed3c26b04aaf874c64a8ff410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

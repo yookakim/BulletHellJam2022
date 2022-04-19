@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class DamageComponent : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public enum Alignment
+	{
+		friendly,
+		enemy,
+		neutral
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public Alignment DamageAlignment { get => damageAlignment; set => damageAlignment = value; }
+	public bool HitsAllies { get => hitsAllies; set => hitsAllies = value; }
+	public int DamageAmount { get => damageAmount; set => damageAmount = value; }
+	public float KnockbackForce { get => knockbackForce; set => knockbackForce = value; }
+
+	private Alignment damageAlignment;
+	private bool hitsAllies;
+	private int damageAmount;
+	private float knockbackForce;
 }

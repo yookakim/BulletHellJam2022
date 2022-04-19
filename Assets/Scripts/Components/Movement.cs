@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+	public Vector2 CurrentMoveDirection { get => currentMoveDirection; set => currentMoveDirection = value; }
+    
     // perhaps editing speed in inspector is only temp until we starting loading in values from player data SO
     [SerializeField] private float moveSpeed;
 
     private Rigidbody2D rb;
     private Vector2 currentMoveDirection;
+
 
 	private void Awake()
 	{

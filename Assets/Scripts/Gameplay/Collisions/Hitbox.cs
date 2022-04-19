@@ -5,15 +5,10 @@ using UnityEngine;
 
 public class Hitbox : MonoBehaviour
 {
-	public enum Alignment
-	{
-		friendly,
-		enemy,
-		neutral
-	}
+
 
 	public bool destroysProjectiles;
-	public Alignment ownerAlignment;
+	public DamageComponent.Alignment ownerAlignment;
 
     public event Action<GameObject> hitboxTriggeredEvent;
 
@@ -23,6 +18,7 @@ public class Hitbox : MonoBehaviour
 		hitboxTriggeredEvent?.Invoke(gameObjectHitBy);
 		if (gameObjectHitBy.layer == LayerMask.NameToLayer("Projectile"))
 		{
+
 			Projectile projectile = gameObjectHitBy.GetComponent<Projectile>();
 			CheckDestroyProjectile(projectile);
 		}

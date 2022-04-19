@@ -4,39 +4,25 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-	public Hitbox.Alignment ProjectileAlignment { get; set; }
+	public DamageComponent.Alignment ProjectileAlignment { get => projectileDamageComponent.DamageAlignment; }
 
 	[SerializeField] private ProjectileData projectileData;
+	[SerializeField] private DamageComponent projectileDamageComponent;
 	private LayerMask hitboxLayer;
 
 	private void Awake()
 	{
 		hitboxLayer = LayerMask.GetMask("Hitbox");
-		ProjectileAlignment = projectileData.projectileAlignment;
+		projectileDamageComponent.DamageAlignment = projectileData.projectileAlignment;
+		projectileDamageComponent.DamageAmount = projectileData.projectileDamage;
+		projectileDamageComponent.KnockbackForce = projectileData.knockbackForce;
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-/*		Debug.Log(LayerMask.LayerToName(collision.gameObject.layer));
-		LayerMask otherColliderLayer = LayerMask.GetMask(LayerMask.LayerToName(collision.gameObject.layer));
-
-		if (otherColliderLayer != hitboxLayer)
-		{
-			return;
-		}*/
 		// pass own gameobject into hitbox right here
 		Hitbox hitbox = collision.gameObject.GetComponent<Hitbox>();
 		hitbox.TriggerHitbox(gameObject);
-
-/*		if (hitboxLayer == otherColliderLayer)
-		{
-			OnDestructibleCollision(collision);
-			return;
-		}
-		if (true)
-		{
-
-		}*/
 	}
 
 	private void OnDestructibleCollision(Collider2D collsion)
