@@ -14,8 +14,8 @@ TagManager:
   - Destructible
   - Player
   - Bomb
-  - FriendlyProjectile
-  - 
+  - Projectile
+  - Hitbox
   - 
   - 
   - 

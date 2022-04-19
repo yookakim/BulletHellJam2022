@@ -7,7 +7,7 @@ public class Bomb : MonoBehaviour
 	[SerializeField] private BombData bombData;
     private Rigidbody2D rb;
 	private SpriteRenderer sprite;
-	private LayerMask destructiblesMask;
+	private LayerMask hitboxMask;
 
 	private float timeRemaining;
 	private bool exploded;
@@ -16,7 +16,7 @@ public class Bomb : MonoBehaviour
 	{
 		rb = GetComponent<Rigidbody2D>();
 		sprite = GetComponent<SpriteRenderer>();
-		destructiblesMask = LayerMask.GetMask("Destructible");
+		hitboxMask = LayerMask.GetMask("Hitbox");
 		timeRemaining = bombData.bombTickDownTime;
 	}
 
@@ -33,24 +33,31 @@ public class Bomb : MonoBehaviour
 
 	private void Explode()
 	{
+		// refactor into a more generic system
+		// instead of only hitting destructibles, hit everything that has a hitbox
+		// defer specific behavior on-hit to the thing that was hit (hitbox component becomes middleman)
+
 		// do the circle cast
 		RaycastHit2D[] hitByExplosion = Physics2D.CircleCastAll(
 			rb.transform.position,
 			bombData.bombExplosionRadius,
 			Vector2.zero,
 			0f,
-			destructiblesMask
+			hitboxMask
 		);
 
 		for (int i = 0; i < hitByExplosion.Length; i++)
 		{
-			TerrainTile tile = hitByExplosion[i].collider.gameObject.GetComponent<TerrainTile>();
+			/*			TerrainTile tile = hitByExplosion[i].collider.gameObject.GetComponent<TerrainTile>();
 
-			tile.DestroyTile();
+						tile.DestroyTile();*/
+
+			// all the hitboxes hit by circlecast
+			Hitbox hitbox = hitByExplosion[i].collider.GetComponent<Hitbox>();
+			hitbox.TriggerHitbox(gameObject);
 		}
 
 		StartCoroutine(DestroyAfterExplosion());
-		Debug.Log("exploding");
 		// Destroy(gameObject);
 	}
 
