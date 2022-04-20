@@ -8,6 +8,8 @@ public class PlayerInputController
 	public Vector2 CurrentWorldCursorPoint { get; private set; }
 	public bool BombInputPressed { get; private set; }
 	public bool CursorInputPressed { get; private set; }
+	public bool MeleeInputPressed { get; private set; }
+	public bool MeleeInputHeld { get; private set; }
 
 	private Camera cam;
 
@@ -24,5 +26,7 @@ public class PlayerInputController
 
 		CurrentWorldCursorPoint = cam.ScreenToWorldPoint(Input.mousePosition);
 		CursorInputPressed = Input.GetMouseButtonDown(0);
+		MeleeInputPressed = Input.GetMouseButtonDown(1);
+		MeleeInputHeld = Input.GetMouseButton(1);
 	}
 }

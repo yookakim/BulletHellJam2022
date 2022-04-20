@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2da1cb8acc14bbf4db1f85946809a4e5, type: 3}
-  m_Name: StarterRevolverData
+  m_Name: BatEcholocation
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 6435513250006416299, guid: fff5a4a0421d554409a5d76072d14526, type: 3}
-  useRate: 10
-  launchForce: 17
-  accuracyDeviationInAngles: 12
-  directionFacesTarget: 0
+  projectilePrefab: {fileID: 6435513250006416299, guid: 8f1ca33d603286f4da6e5e79231450ff, type: 3}
+  useRate: 1
+  launchForce: 5
+  clusterAccuracyDeviation: 10
+  individualAccuracyDeviation: 0
+  directionFacesTarget: 1
+  clusterAmount: 2
+  clusterSpreadAngleInDegrees: 15

@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
 	private Health health;
 	private PlayerBombLauncher bombLauncher;
 	private WeaponController weaponController;
+	private MeleeController meleeController;
+	private Hitbox hitbox;
 
 	private void Awake()
 	{
@@ -19,6 +21,8 @@ public class Player : MonoBehaviour
 		health = GetComponent<Health>();
 		bombLauncher = GetComponent<PlayerBombLauncher>();
 		weaponController = GetComponent<WeaponController>();
+		meleeController = GetComponent<MeleeController>();
+		hitbox = GetComponentInChildren<Hitbox>();
 
 		playerTransformReference.reference = transform;
 	}
@@ -27,6 +31,7 @@ public class Player : MonoBehaviour
 	{
 		inputController.ReadInput();
 		weaponController.CurrentWeaponTarget = inputController.CurrentWorldCursorPoint;
+		meleeController.CurrentWeaponTarget = inputController.CurrentWorldCursorPoint;
 		movement.Move(inputController.CurrentMoveInput);
 
 		if (inputController.BombInputPressed)
@@ -38,6 +43,48 @@ public class Player : MonoBehaviour
 		if (inputController.CursorInputPressed)
 		{
 			weaponController.AttemptUse();
+		}
+
+		if (inputController.MeleeInputPressed)
+		{
+			// for detecting single click actions like double click abilities
+		}
+
+		if (inputController.MeleeInputHeld)
+		{
+			meleeController.AttemptUse();
+		}
+	}
+
+	private void OnEnable()
+	{
+		hitbox.hitboxTriggeredEvent += OnHitboxTrigger;
+		health.HealthZeroEvent += OnHealthZero;
+	}
+
+	private void OnDisable()
+	{
+		hitbox.hitboxTriggeredEvent -= OnHitboxTrigger;
+		health.HealthZeroEvent -= OnHealthZero;
+	}
+
+	private void OnHealthZero(GameObject deadPlayerObject)
+	{
+		// put player into dead state later
+
+		Time.timeScale = 0;
+	}
+
+	private void OnHitboxTrigger(GameObject objectHitBy)
+	{
+		DamageComponent gameObjectDamageComponent = objectHitBy.GetComponent<DamageComponent>();
+
+		if (gameObjectDamageComponent != null)
+		{
+			if (gameObjectDamageComponent.DamageAlignment != hitbox.ownerAlignment)
+			{
+				health.DealDamage(gameObjectDamageComponent.DamageAmount);
+			}
 		}
 	}
 }

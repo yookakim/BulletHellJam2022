@@ -5,23 +5,35 @@ using UnityEngine;
 
 public class Hitbox : MonoBehaviour
 {
-
+	private GameObject owner;
 
 	public bool destroysProjectiles;
 	public DamageComponent.Alignment ownerAlignment;
 
     public event Action<GameObject> hitboxTriggeredEvent;
 
-    public void TriggerHitbox(GameObject gameObjectHitBy)
+	private void Awake()
 	{
-		// defer on-hit behavior to event listeners
-		hitboxTriggeredEvent?.Invoke(gameObjectHitBy);
+		owner = transform.parent.gameObject;
+	}
+
+	public void TriggerHitbox(GameObject gameObjectHitBy)
+	{
 		if (gameObjectHitBy.layer == LayerMask.NameToLayer("Projectile"))
 		{
 
 			Projectile projectile = gameObjectHitBy.GetComponent<Projectile>();
+
+			if (ReferenceEquals(projectile.Owner, owner))
+			{
+				// what happens when we want entities to get hit by their own projectiles?
+				return;
+			}
+
 			CheckDestroyProjectile(projectile);
 		}
+		// defer on-hit behavior to event listeners
+		hitboxTriggeredEvent?.Invoke(gameObjectHitBy);
 	}
 
 	public void CheckDestroyProjectile(Projectile projectile)

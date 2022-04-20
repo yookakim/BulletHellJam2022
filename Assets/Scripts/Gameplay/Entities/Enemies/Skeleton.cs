@@ -11,11 +11,6 @@ public class Skeleton : Entity
 
 	public Transform PlayerTransform { get => playerTransform.reference; }
 
-	private void FixedUpdate()
-	{
-		// ChasePlayer();
-	}
-
 	protected override void OnHit(GameObject gameObjectHitBy)
 	{
 		base.OnHit(gameObjectHitBy);

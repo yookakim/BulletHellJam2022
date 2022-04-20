@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+	public GameObject Owner { get; set; }
 	public DamageComponent.Alignment ProjectileAlignment { get => projectileDamageComponent.DamageAlignment; }
 
 	[SerializeField] private ProjectileData projectileData;

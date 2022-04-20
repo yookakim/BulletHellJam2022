@@ -11,14 +11,22 @@ public class TilemapGenerator : MonoBehaviour
 	[SerializeField] private float noiseXScale;
 	[SerializeField] private float noiseYScale;
 	[SerializeField] private float offsetMultiplier;
-	[SerializeField] private float addTileNoiseOutputThreshold;
 	[SerializeField] private int minimumDistanceBetweenRooms;
+	[SerializeField] private float addTileNoiseOutputThreshold;
 	[SerializeField] private float potentialRoomLocationThreshold;
+	[SerializeField] private float fleshTileSpawnRange;
+
+	[SerializeField] private float skellySpawnRate;
+	[SerializeField] private float caveBatSpawnRate;
+	[SerializeField] private GameObject skellyPrefab;
+	[SerializeField] private GameObject caveBatPrefab;
 
 	[SerializeField] private TileBase mapEdgeTile;
-	[SerializeField] private TileBase testTile;
-	[SerializeField] private TileBase testRoofTile;
+	[SerializeField] private TileBase dirtTile;
+	[SerializeField] private TileBase dirtRoofTile;
 	[SerializeField] private TileBase groundTile;
+	[SerializeField] private TileBase fleshTile;
+	[SerializeField] private TileBase fleshRoofTile;
 	[SerializeField] private TileBase potentialRoomLocationTile;
 	[SerializeField] private TileBase roomCenterConfirmedTile;
 
@@ -76,7 +84,7 @@ public class TilemapGenerator : MonoBehaviour
 		{
 			for (int j = -chunkHeight / 2; j < chunkHeight / 2; j++)
 			{
-				groundTilemap.SetTile(new Vector3Int(i, j, 0), testTile);
+				groundTilemap.SetTile(new Vector3Int(i, j, 0), dirtTile);
 			}
 		}
 	}
@@ -107,11 +115,12 @@ public class TilemapGenerator : MonoBehaviour
 		{
 			for (int j = chunkLowerY; j < chunkUpperY; j++)
 			{
-				// divide by th
 				groundTilemap.SetTile(new Vector3Int(i, j, 0), groundTile);
+
+				Vector2 thisTilePosition = groundTilemap.GetCellCenterWorld(new Vector3Int(i, j, 0));
+
 				float inputX = 0.5f + i / (float)tilemapWidth;
 				float inputY = ((j + chunkHeight / 2) % chunkHeight) / (float)chunkHeight;
-				// float inputY = j;
 
 				float offset = nextChunkY / chunkHeight;
 
@@ -121,12 +130,34 @@ public class TilemapGenerator : MonoBehaviour
 				if (noiseResult >= addTileNoiseOutputThreshold && noiseResult <= potentialRoomLocationThreshold)
 				{
 					// Debug.Log("hmmmm");
-					terrainRoofTilemap.SetTile(new Vector3Int(i, j, 0), testRoofTile);
-					terrainTilemap.SetTile(new Vector3Int(i, j, 0), testTile);
+					terrainRoofTilemap.SetTile(new Vector3Int(i, j, 0), dirtRoofTile);
+					terrainTilemap.SetTile(new Vector3Int(i, j, 0), dirtTile);
+				}
+				else if (noiseResult >= potentialRoomLocationThreshold && noiseResult <= potentialRoomLocationThreshold + fleshTileSpawnRange)
+				{
+					if (!terrainTilemap.HasTile(new Vector3Int(i, j - 1, 0)))
+					{
+						terrainRoofTilemap.SetTile(new Vector3Int(i, j, 0), fleshRoofTile);
+						terrainTilemap.SetTile(new Vector3Int(i, j, 0), fleshTile);
+					}
 				}
 				else
 				{
-					// terrainTilemap.SetTile(new Vector3Int(i, j, 0), null);
+					// bool willSpawnSkellyHere = false;
+					if (!terrainTilemap.HasTile(new Vector3Int(i, j - 1, 0)))
+					{
+						float skellyRandomPercent = Random.Range(0f, 1f);
+						float caveBatRandomPercent = Random.Range(0f, 1f);
+
+						if (skellyRandomPercent <= skellySpawnRate)
+						{
+							Instantiate(skellyPrefab, thisTilePosition, Quaternion.identity);
+						}
+						if (caveBatRandomPercent <= caveBatSpawnRate)
+						{
+							Instantiate(caveBatPrefab, thisTilePosition, Quaternion.identity);
+						}
+					}
 				}
 
 				if (noiseResult >= potentialRoomLocationThreshold)
@@ -142,40 +173,18 @@ public class TilemapGenerator : MonoBehaviour
 		
 		potentialRoomLocations.Sort(potentialRoomLocationComparer);
 
-		TrySpawnRoom(potentialRoomLocations);
+		// TrySpawnRoom(potentialRoomLocations);
 
 		nextChunkY += chunkHeight;
 		// noiseShiftX += 1 / (float)tilemapWidth;
 	}
 
-	private void TrySpawnRoom(List<PotentialRoomLocation> potentialRoomLocations)
+/*	private void TrySpawnRoom(List<PotentialRoomLocation> potentialRoomLocations)
 	{
-/*		Debug.Log("PRINTING NOISE OUTPUTS OF POTENTIAL ROOMS IN ORDER");
-		for (int i = 0; i < potentialRoomLocations.Count; i++)
-		{
-			Debug.Log(potentialRoomLocations[i].noiseOutputValue);
-		}*/
-
-		// for each grid location in potential locations, check if there is already room nearby;
-		// if not, then add that coordinate to dictionary of rooms and return
 		for (int i = 0; i < potentialRoomLocations.Count; i++)
 		{
 			if (!ConfirmedRoomExistsNearby(potentialRoomLocations[i].gridPosition))
 			{
-				/*
-				Debug.Log(roomTilemapPrefab.cellBounds.xMin);
-				roomTilemapPrefab.CompressBounds();
-				TileBase[] roomTileArray = roomTilemapPrefab.GetTilesBlock(roomTilemapPrefab.cellBounds);
-
-				BoundsInt newRoomBounds = roomTilemapPrefab.cellBounds;
-				newRoomBounds.position = potentialRoomLocations[i].gridPosition;
-
-				tilemapManager.RemoveTileBlock(newRoomBounds);
-				terrainTilemap.SetTilesBlock(newRoomBounds, roomTileArray);
-
-				newRoomBounds.position = new Vector3Int(newRoomBounds.position.x, newRoomBounds.position.y + 1, 0);
-				// terrainRoofTilemap.SetTilesBlock
-				*/
 
 				terrainTilemap.SetTile(potentialRoomLocations[i].gridPosition, roomCenterConfirmedTile);
 				generatedRooms.Add(potentialRoomLocations[i].gridPosition, roomCenterConfirmedTile);
@@ -183,7 +192,7 @@ public class TilemapGenerator : MonoBehaviour
 				// return;
 			}
 		}
-	}
+	}*/
 
 	private bool ConfirmedRoomExistsNearby(Vector3Int positionToCheck)
 	{

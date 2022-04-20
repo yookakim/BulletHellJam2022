@@ -10,6 +10,8 @@ public class PlayerScanRaycast : MonoBehaviour
     public bool HasSightOfPlayer { get; private set; }
     public Vector2 VectorToPlayer { get => playerTransform.reference.position - transform.position; }
 
+    public Vector2 CurrentPlayerPosition { get => playerTransform.reference.position; }
+
     private LayerMask hitboxLayer;
 
     private float timeLastSeenPlayer;
@@ -40,7 +42,8 @@ public class PlayerScanRaycast : MonoBehaviour
         
 		foreach (RaycastHit2D raycastHit in raycast)
 		{
-			if (LayerMask.LayerToName(raycastHit.collider.transform.parent.gameObject.layer).Equals("Destructible"))
+			if (LayerMask.LayerToName(raycastHit.collider.transform.parent.gameObject.layer).Equals("Destructible") &&
+                !ReferenceEquals(raycastHit.collider.transform.parent.gameObject, gameObject))
 			{
                 return;
 			}

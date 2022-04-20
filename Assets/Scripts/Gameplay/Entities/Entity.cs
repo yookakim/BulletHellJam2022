@@ -11,17 +11,20 @@ public class Entity : MonoBehaviour
 	[SerializeField] protected WeaponController weaponController;
 	[SerializeField] protected EntityStatusEffects entityStatusEffects;
 	[SerializeField] protected float entityMass;
-	// [SerializeField] protected DamageComponent.Alignment entityAlignment;
 
 	public float EntityMass { get => entityMass; }
-	// public DamageComponent.Alignment EntityAlignment { get => entityAlignment; }
 
-	// private EntityStatusEffects entityStatusEffects;
 
-	private void Awake()
+	private void OnEnable()
 	{
 		health.HealthZeroEvent += OnEntityHealthZero;
 		hitbox.hitboxTriggeredEvent += OnHit;
+	}
+
+	private void OnDisable()
+	{
+		health.HealthZeroEvent -= OnEntityHealthZero;
+		hitbox.hitboxTriggeredEvent -= OnHit;
 	}
 
 	protected virtual void OnHit(GameObject gameObjectHitBy)

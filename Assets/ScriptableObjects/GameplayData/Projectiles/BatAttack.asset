@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2da1cb8acc14bbf4db1f85946809a4e5, type: 3}
-  m_Name: SkellyBowData
+  m_Script: {fileID: 11500000, guid: c97c6e20f3536404b8503bdf222162a0, type: 3}
+  m_Name: BatAttack
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 6435513250006416299, guid: 88dab23abbe55d64a98b425597cbb967, type: 3}
-  useRate: 1.5
-  launchForce: 10
-  accuracyDeviationInAngles: 12
-  directionFacesTarget: 1
+  projectileDamage: 1
+  projectileAlignment: 1
+  knockbackForce: 0
