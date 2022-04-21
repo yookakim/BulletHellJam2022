@@ -16,6 +16,7 @@ public class CaveBat : Entity
     [SerializeField] private float randomMoveInterval;
     [SerializeField] private float randomRepositionInterval;
     [SerializeField] private float repositionSpeedMultiplier;
+    [SerializeField] private float randomSearchRetryAngleInterval;
 
     private Vector2 currentDestination;
     private bool randomLocationReached;
@@ -54,13 +55,18 @@ public class CaveBat : Entity
 
         bool randomPositionFound = false;
         int antiFreezeCounter = 0; // LMAO
+        float searchAngleIncrement = 0;
 
-		while (!randomPositionFound)
+        float randomRotateAngle = Random.Range(0, 360);
+        Vector2 randomDirection = HelperFunctions.RotateVectorRad(Vector2.up, randomRotateAngle * Mathf.Deg2Rad);
+
+        while (!randomPositionFound)
 		{
-            float randomRotateAngle = Random.Range(0, 360);
-            Vector2 randomDirection = HelperFunctions.RotateVectorRad(Vector2.up, randomRotateAngle * Mathf.Deg2Rad);
+            
+            
+            Vector2 incrementedSearchDirection = HelperFunctions.RotateVectorRad(randomDirection, searchAngleIncrement * Mathf.Deg2Rad);
 
-            RaycastHit2D raycastCheck = Physics2D.Raycast(transform.position, randomDirection, distance, LayerMask.GetMask("Destructible"));
+            RaycastHit2D raycastCheck = Physics2D.Raycast(transform.position, incrementedSearchDirection, distance, LayerMask.GetMask("Destructible"));
 
 			if (raycastCheck.collider == null)
 			{
@@ -69,17 +75,19 @@ public class CaveBat : Entity
             }
 			else
 			{
-                Debug.Log("check ran into terrain, checking again: " + raycastCheck.collider.gameObject);
+                // Debug.Log("check ran into terrain, checking again: " + raycastCheck.collider.gameObject);
 			}
 
             antiFreezeCounter++;
 
-			if (antiFreezeCounter >= 15)
+			if (antiFreezeCounter >= (360 / randomSearchRetryAngleInterval))
 			{
-                Debug.LogError("Attempted to find a new random direction more than 14 times, exiting to avoid freeze");
-                return (Vector2)transform.position;
+                Debug.LogError("Could not find any suitable destination, exiting to avoid freeze");
+                return transform.position;
 			}
-		}
+
+            searchAngleIncrement += randomSearchRetryAngleInterval;
+        }
 
         return positionToReturn;
 	}

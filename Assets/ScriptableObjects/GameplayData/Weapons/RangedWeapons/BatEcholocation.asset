@@ -18,5 +18,5 @@ MonoBehaviour:
   clusterAccuracyDeviation: 10
   individualAccuracyDeviation: 0
   directionFacesTarget: 1
-  clusterAmount: 2
-  clusterSpreadAngleInDegrees: 15
+  clusterAmount: 3
+  clusterSpreadAngleInDegrees: 20

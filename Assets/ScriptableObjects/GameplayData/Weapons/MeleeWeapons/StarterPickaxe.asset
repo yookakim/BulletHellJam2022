@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StarterPickaxe
   m_EditorClassIdentifier: 
   meleeAttackPrefab: {fileID: 8721755205495771176, guid: 130ad4a4cf19550429b10f9c0f520e89, type: 3}
-  useRate: 3
-  meleeDamage: 15
+  useRate: 2
+  meleeDamage: 10
   alignment: 0
   knockbackForce: 0

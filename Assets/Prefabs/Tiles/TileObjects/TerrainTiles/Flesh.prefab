@@ -196,6 +196,7 @@ MonoBehaviour:
   - {fileID: 0}
   tileBreakSpriteRenderer: {fileID: 0}
   tileBreakSpriteRendererRoof: {fileID: 0}
+  tallerColliderVersion: {fileID: 11400000, guid: 9fed84714915d6e49bb858ab346f8687, type: 2}
 --- !u!114 &1459715073531411235
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -37,7 +37,6 @@ public class Player : MonoBehaviour
 		if (inputController.BombInputPressed)
 		{
 			bombLauncher.LaunchBomb(inputController.CurrentWorldCursorPoint);
-			Debug.Log("bomb input pressed");
 		}
 
 		if (inputController.CursorInputPressed)

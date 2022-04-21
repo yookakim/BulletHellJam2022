@@ -49,12 +49,80 @@ MonoBehaviour:
     m_Address: Assets/Scripts
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 940076c8d417d9c42849e5e92e925cb0
-    m_Address: Assets/Sprites
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: b8e755903e20d404aa11421b99651805
     m_Address: Assets/Prefabs
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 33bf9c8aaa6b2494891c4b8a111a75a5
+    m_Address: Assets/ScriptableObjects/GameplayData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 13a8f26498dabbc4c838573ecab25bf6
+    m_Address: Assets/ScriptableObjects/ScriptableObjectVariables
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 11be94b373daeab4ca80ebb16e117bd4
+    m_Address: Assets/StateGraphs
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6206e47f481a48d4992c6de73616dba9
+    m_Address: Assets/Animation
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2271738357c26394887b145ca66bb6d7
+    m_Address: Assets/Materials
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0f875e8e916b86a479c997b7539f9344
+    m_Address: Assets/MineTile
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ded04d6082c84134fbc640e39443ac44
+    m_Address: Assets/Sprites/Combat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3f04c10089a3faf43b5eb155c06284ab
+    m_Address: Assets/Sprites/Entities
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e9900e27b8c61a54f8fdd6fe6c9e5b9f
+    m_Address: Assets/Sprites/Palettes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4a706aff7cd342d42a956ecdcd226ec9
+    m_Address: Assets/Sprites/Projectiles
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b5d2573903febae428db89f788692424
+    m_Address: Assets/Sprites/Spritesheets
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 552d4cb31364f6a4394b77325b99611c
+    m_Address: Assets/Sprites/Tilemaps
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c848f0a0ec4fbfe4c8beaf8f92228f32
+    m_Address: Assets/Sprites/Tiles
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2aab459dfb6f4e34e9d86c394f28d2bc
+    m_Address: Assets/Sprites/TileSprites
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8a615f41728386f408d349b3965d7917
+    m_Address: Assets/Scenes/GameplayScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 049681af7d8f74240b429283e54060bf
+    m_Address: Assets/UniversalRenderPipelineGlobalSettings.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 681886c5eb7344803b6206f758bf0b1c
+    m_Address: Assets/Settings/UniversalRP.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 424799608f7334c24bf367e4bbfa7f9a
+    m_Address: Assets/Settings/Renderer2D.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

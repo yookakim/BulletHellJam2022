@@ -46,9 +46,9 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.28925496}
-  m_Size: {x: 0.5039854, y: 0.58598363}
-  m_Direction: 0
+  m_Offset: {x: -0.000000019291484, y: 0.3381714}
+  m_Size: {x: 0.9705739, y: 0.454459}
+  m_Direction: 1
 --- !u!114 &7652225997356876175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +254,7 @@ MonoBehaviour:
   randomMoveInterval: 0.2
   randomRepositionInterval: 0.4
   repositionSpeedMultiplier: 3.5
+  randomSearchRetryAngleInterval: 15
 --- !u!114 &5908812777612302432
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,13 +15,26 @@ public class TilemapManager : MonoBehaviour
 
 	public void RemoveTile(Vector3Int tilePosition)
 	{
+		if (!terrainTilemap.HasTile(tilePosition))
+		{
+			Debug.LogError("Tried to remove nonexisting tile");
+			return;
+		}
 		GameObject tileObjectToRemove = terrainTilemap.GetInstantiatedObject(tilePosition);
-
+		
 
 		StartCoroutine(DelayedDestroy(tileObjectToRemove, tilePosition));
 		Destroy(tileObjectToRemove);
 
+
+
+
 		// terrainTilemap.SetTile(tilePosition, null);
+	}
+
+	public void ReplaceTile(Vector3Int postion, TileBase replaceWith)
+	{
+
 	}
 
 	public void RemoveTileBlock(BoundsInt boundsToRemove)
@@ -42,13 +55,25 @@ public class TilemapManager : MonoBehaviour
 		// Destroy(objectToRemove);
 		terrainTilemap.SetTile(tilePosition, null);
 		terrainRoofTilemap.SetTile(tilePosition, null);
+
+
+		if (terrainTilemap.HasTile(new Vector3Int(tilePosition.x, tilePosition.y - 1, 0)))
+		{
+			GameObject tileOneBelowObject = terrainTilemap.GetInstantiatedObject(new Vector3Int(tilePosition.x, tilePosition.y - 1, 0));
+
+			if (tileOneBelowObject != null)
+			{
+				TerrainTile tileOneBelow = tileOneBelowObject.GetComponent<TerrainTile>();
+				StartCoroutine(DelayedReplaceTile(new Vector3Int(tilePosition.x, tilePosition.y - 1, 0), tileOneBelow.TallerColliderVersion));
+				Destroy(tileOneBelow.gameObject);
+
+			}
+		}
 	}
 
-	private IEnumerator DelayedDestroyBlock(BoundsInt boundsToRemove)
+	private IEnumerator DelayedReplaceTile(Vector3Int position, TileBase tileToReplace)
 	{
 		yield return new WaitForEndOfFrame();
-
-		terrainTilemap.SetTilesBlock(boundsToRemove, null);
-		terrainRoofTilemap.SetTilesBlock(boundsToRemove, null);
+		terrainTilemap.SetTile(position, tileToReplace);
 	}
 }

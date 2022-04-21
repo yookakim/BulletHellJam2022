@@ -2,11 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Bomb : MonoBehaviour
 {
 	[SerializeField] private BombData bombData;
-    private Rigidbody2D rb;
+	[SerializeField] private SpriteRenderer explosionSprite;
+	[SerializeField] private UnityEngine.Rendering.Universal.Light2D explosionLight;
+
+	[SerializeField] private GameObject bombFlashObject;
+	[SerializeField] private float bombFlashInterval;
+	[SerializeField] private AnimationCurve bombFlashCurve;
+	[SerializeField] private float flashStartTimeBeforeExplosion;
+
+	private Rigidbody2D rb;
 	private SpriteRenderer sprite;
+	
 	private LayerMask hitboxMask;
 
 	private float timeRemaining;
@@ -16,6 +26,7 @@ public class Bomb : MonoBehaviour
 	{
 		rb = GetComponent<Rigidbody2D>();
 		sprite = GetComponent<SpriteRenderer>();
+
 		hitboxMask = LayerMask.GetMask("Hitbox");
 		timeRemaining = bombData.bombTickDownTime;
 	}
@@ -28,6 +39,12 @@ public class Bomb : MonoBehaviour
 		{
 			exploded = true;
 			Explode();
+		}
+
+		if (timeRemaining <= flashStartTimeBeforeExplosion && !bombFlashObject.activeSelf && !exploded)
+		{
+			bombFlashObject.SetActive(true);
+			LeanTween.alpha(bombFlashObject, 0, bombFlashInterval).setLoopClamp().setEase(bombFlashCurve);
 		}
 	}
 
@@ -56,9 +73,21 @@ public class Bomb : MonoBehaviour
 			Hitbox hitbox = hitByExplosion[i].collider.GetComponent<Hitbox>();
 			hitbox.TriggerHitbox(gameObject);
 		}
+		explosionSprite.gameObject.SetActive(true);
+		explosionSprite.GetComponent<Animator>().Play("BombExplosion");
+		sprite.sprite = null;
 
 		StartCoroutine(DestroyAfterExplosion());
 		// Destroy(gameObject);
+
+		explosionLight.gameObject.SetActive(true);
+		
+		bombFlashObject.SetActive(false);
+
+		LeanTween.value(explosionLight.intensity, 0, 0.45f).setOnUpdate((float val) =>
+		{
+			explosionLight.intensity = val;
+		});
 	}
 
 	private IEnumerator DestroyAfterExplosion()
