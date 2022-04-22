@@ -5,12 +5,14 @@ using UnityEngine;
 public class MeleeController : MonoBehaviour
 {
 	public Vector2 CurrentWeaponTarget { get; set; }
+	public GameObject MeleeOwner { get => meleeOwner; }
 
 	private float timeLastUsed;
 
 	public bool CanUse { get; private set; }
 
 	[SerializeField] private MeleeData meleeData;
+	[SerializeField] private GameObject meleeOwner;
 
 	private void Awake()
 	{

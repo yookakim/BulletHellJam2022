@@ -6,7 +6,7 @@ using UnityEngine;
 public class Hitbox : MonoBehaviour
 {
 	private GameObject owner;
-
+	private int ownerLayer;
 	public bool destroysProjectiles;
 	public DamageComponent.Alignment ownerAlignment;
 
@@ -15,6 +15,7 @@ public class Hitbox : MonoBehaviour
 	private void Awake()
 	{
 		owner = transform.parent.gameObject;
+		ownerLayer = owner.layer;
 	}
 
 	public void TriggerHitbox(GameObject gameObjectHitBy)
@@ -38,7 +39,19 @@ public class Hitbox : MonoBehaviour
 
 	public void CheckDestroyProjectile(Projectile projectile)
 	{
-		if (projectile.ProjectileAlignment != ownerAlignment)
+
+		if (ownerLayer == LayerMask.NameToLayer("Destructible"))
+		{
+			Debug.Log("destructible's hitbox just detected projectile");
+
+			if (projectile.NumberBounces < 1 && projectile.ProjectileAlignment != ownerAlignment)
+			{
+				Destroy(projectile.gameObject);
+
+			}
+			return;
+		}
+		else if (projectile.ProjectileAlignment != ownerAlignment)
 		{
 			Destroy(projectile.gameObject);
 		}

@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3195273532025674780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 260455703544563130}
+  - component: {fileID: 5652650573861303452}
+  m_Layer: 7
+  m_Name: RangedWeaponTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &260455703544563130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3195273532025674780}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.401, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8589835605523327344}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5652650573861303452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3195273532025674780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486c32b65c03efa4cae7842ed0ab5ff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: 3a416c9f80c9f0b4a989b176f721cff8, type: 2}
+  weaponOwner: {fileID: 8589835605523327350}
 --- !u!1 &6009796609490791992
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +297,6 @@ GameObject:
   - component: {fileID: 8589835605523327353}
   - component: {fileID: 8589835605523327359}
   - component: {fileID: 8589835605523327356}
-  - component: {fileID: 8589835605523327358}
   - component: {fileID: 5438939085133954746}
   m_Layer: 7
   m_Name: knight_v2
@@ -276,6 +321,7 @@ Transform:
   - {fileID: 8589835605241206699}
   - {fileID: 5288726498011766219}
   - {fileID: 7335065828551814796}
+  - {fileID: 260455703544563130}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -431,19 +477,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 0.2}
   m_EdgeRadius: 0
---- !u!114 &8589835605523327358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8589835605523327350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 486c32b65c03efa4cae7842ed0ab5ff5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: 3a416c9f80c9f0b4a989b176f721cff8, type: 2}
 --- !u!114 &5438939085133954746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,3 +490,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meleeData: {fileID: 11400000, guid: 284f428c33189c34993f2b7faec8db9c, type: 2}
+  meleeOwner: {fileID: 8589835605523327350}

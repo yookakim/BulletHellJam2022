@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 6435513250006416299, guid: fff5a4a0421d554409a5d76072d14526, type: 3}
   useRate: 3.5
-  launchForce: 17
+  launchForce: 15
   clusterAccuracyDeviation: 1
   individualAccuracyDeviation: 0
   directionFacesTarget: 0
   clusterAmount: 1
   clusterSpreadAngleInDegrees: 0
+  spawnDistanceFromWeapon: 0

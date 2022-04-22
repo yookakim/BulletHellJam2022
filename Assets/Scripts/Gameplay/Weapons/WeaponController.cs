@@ -7,9 +7,12 @@ using Unity.VisualScripting;
 public class WeaponController : MonoBehaviour
 {
 	public Vector2 CurrentWeaponTarget { get; set; }
+	public Transform LiveWeaponTargetTransform { get; set; }
 	public bool CanUse { get; private set; }
+	public GameObject WeaponOwner { get => weaponOwner; }
 
     [SerializeField] private WeaponData weaponData;
+	[SerializeField] private GameObject weaponOwner;
 
     private float timeLastUsed;
 

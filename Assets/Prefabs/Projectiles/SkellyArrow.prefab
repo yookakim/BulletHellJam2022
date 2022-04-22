@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6435513250006416311}
   - component: {fileID: 6435513250006416296}
   - component: {fileID: 6435513250006416298}
-  - component: {fileID: 8969306444329286617}
   - component: {fileID: 2696592052501711285}
   - component: {fileID: 6247118325087735762}
+  - component: {fileID: 3809096590439413402}
   m_Layer: 9
   m_Name: SkellyArrow
   m_TagString: Untagged
@@ -109,22 +109,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &8969306444329286617
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6435513250006416299}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.029045492, y: 0.20912765}
-  m_Size: {x: 0.103253365, y: 0.25429}
-  m_Direction: 0
 --- !u!114 &2696592052501711285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,3 +135,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03008d3ed3c26b04aaf874c64a8ff410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &3809096590439413402
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6435513250006416299}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.03, y: 0.21}
+  serializedVersion: 2
+  m_Radius: 0.16

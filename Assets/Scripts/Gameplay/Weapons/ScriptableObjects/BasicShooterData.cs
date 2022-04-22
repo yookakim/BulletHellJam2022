@@ -11,6 +11,7 @@ public class BasicShooterData : WeaponData
 	public bool directionFacesTarget;
 	public int clusterAmount;
 	public float clusterSpreadAngleInDegrees;
+	public float spawnDistanceFromWeapon;
 
 	public override void UseWeapon(WeaponController weaponController)
 	{
@@ -34,7 +35,7 @@ public class BasicShooterData : WeaponData
 
 			GameObject projectileObject = Instantiate(
 				projectilePrefab,
-				weaponController.transform.position,
+				(Vector2)weaponController.transform.position + targetDirection * spawnDistanceFromWeapon,
 				Quaternion.identity
 			);
 
@@ -53,9 +54,11 @@ public class BasicShooterData : WeaponData
 
 			Projectile projectile = projectileObject.GetComponent<Projectile>();
 
+			projectile.Direction = directionProcessedForAccuracy;
+
 			if (projectile != null)
 			{
-				projectile.Owner = weaponController.gameObject;
+				projectile.Owner = weaponController.WeaponOwner;
 			}
 		}
 	}

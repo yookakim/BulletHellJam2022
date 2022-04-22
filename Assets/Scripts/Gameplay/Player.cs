@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 		movement = GetComponent<Movement>();
 		health = GetComponent<Health>();
 		bombLauncher = GetComponent<PlayerBombLauncher>();
-		weaponController = GetComponent<WeaponController>();
+		weaponController = GetComponentInChildren<WeaponController>();
 		meleeController = GetComponent<MeleeController>();
 		hitbox = GetComponentInChildren<Hitbox>();
 

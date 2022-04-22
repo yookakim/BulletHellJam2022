@@ -16,3 +16,10 @@ MonoBehaviour:
   projectileLifetime: 5
   projectileAlignment: 0
   knockbackForce: 5
+  numberBounces: 0
+  accelerating: 0
+  accelerationAmount: 15
+  accelerationDelay: 0
+  setTargetAfterDelay: 0
+  rotating: 0
+  rotatingAmount: 0

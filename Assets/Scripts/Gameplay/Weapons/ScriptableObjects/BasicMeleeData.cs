@@ -26,7 +26,7 @@ public class BasicMeleeData : MeleeData
 		if (meleeAttack != null)
 		{
 			meleeAttack.InitializeMeleeData(this);
-			meleeAttack.Owner = meleeController.gameObject;
+			meleeAttack.Owner = meleeController.MeleeOwner;
 		}
 	}
 }
