@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: BatAttack
   m_EditorClassIdentifier: 
   projectileDamage: 1
+  projectileLifetime: 2.5
   projectileAlignment: 1
   knockbackForce: 0

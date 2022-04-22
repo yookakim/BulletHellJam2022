@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: FleshyMassData
   m_EditorClassIdentifier: 
   projectileDamage: 1
+  projectileLifetime: 5
   projectileAlignment: 1
   knockbackForce: 0

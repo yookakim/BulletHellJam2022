@@ -597,7 +597,7 @@ MonoBehaviour:
   potentialRoomLocationThreshold: 0.65
   fleshTileSpawnRange: 0
   dungeonSpawnFrequencyChunks: 3
-  skellySpawnRate: 0.023
+  skellySpawnRate: 0.015
   caveBatSpawnRate: 0.006
   skellyPrefab: {fileID: 6803426168261079972, guid: 4598aadbc1525524597dfa8882c747a9, type: 3}
   caveBatPrefab: {fileID: 6803426168261079972, guid: 1f00e9d2031e99548a57cd0e56d0b534, type: 3}

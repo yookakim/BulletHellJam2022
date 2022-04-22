@@ -11,12 +11,24 @@ public class Projectile : MonoBehaviour
 	[SerializeField] private DamageComponent projectileDamageComponent;
 	private LayerMask hitboxLayer;
 
+	private float elapsedLifetime;
+
 	private void Awake()
 	{
 		hitboxLayer = LayerMask.GetMask("Hitbox");
 		projectileDamageComponent.DamageAlignment = projectileData.projectileAlignment;
 		projectileDamageComponent.DamageAmount = projectileData.projectileDamage;
 		projectileDamageComponent.KnockbackForce = projectileData.knockbackForce;
+	}
+
+	private void Update()
+	{
+		elapsedLifetime += Time.deltaTime;
+
+		if (elapsedLifetime >= projectileData.projectileLifetime)
+		{
+			Destroy(gameObject);
+		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)

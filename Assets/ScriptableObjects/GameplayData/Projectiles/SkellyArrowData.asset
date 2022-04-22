@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: SkellyArrowData
   m_EditorClassIdentifier: 
   projectileDamage: 1
+  projectileLifetime: 4
   projectileAlignment: 1
   knockbackForce: 0

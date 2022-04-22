@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: RevolverBulletData
   m_EditorClassIdentifier: 
   projectileDamage: 5
+  projectileLifetime: 5
   projectileAlignment: 0
   knockbackForce: 5

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: SkellyBowData
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 6435513250006416299, guid: 88dab23abbe55d64a98b425597cbb967, type: 3}
-  useRate: 1.5
+  useRate: 1.7
   launchForce: 6
-  clusterAccuracyDeviation: 5
+  clusterAccuracyDeviation: 13
   individualAccuracyDeviation: 0
   directionFacesTarget: 1
   clusterAmount: 1

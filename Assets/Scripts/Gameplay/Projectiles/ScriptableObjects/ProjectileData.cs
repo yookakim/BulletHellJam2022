@@ -6,6 +6,7 @@ using UnityEngine;
 public class ProjectileData : ScriptableObject
 {
     public int projectileDamage;
+    public float projectileLifetime;
     public DamageComponent.Alignment projectileAlignment;
     public float knockbackForce;
 }

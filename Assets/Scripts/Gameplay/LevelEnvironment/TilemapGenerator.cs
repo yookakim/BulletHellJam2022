@@ -144,15 +144,6 @@ public class TilemapGenerator : MonoBehaviour
 
 			BoundsInt.PositionEnumerator positionsInPrefabBounds = prefabBounds.allPositionsWithin;
 
-			/*			BoundsInt roomWorldBounds = dungeonFloor.cellBounds;
-						roomWorldBounds.position = spawnPosition;
-						BoundsInt.PositionEnumerator positionsInBounds = roomWorldBounds.allPositionsWithin;
-						TileBase[] groundFloorTiles = dungeonFloor.GetTilesBlock(dungeonFloor.cellBounds);
-
-						groundTilemap.SetTilesBlock(roomWorldBounds, groundFloorTiles);
-
-						Debug.Log(dungeonWalls.cellBounds);
-						Debug.Log(dungeonWalls.cellBounds.xMin);*/
 			Debug.Log(prefabBounds);
 			Debug.Log(spawnPosition.y + ", " + nextChunkY);
 
@@ -171,6 +162,8 @@ public class TilemapGenerator : MonoBehaviour
 				}
 			}
 
+			yield return null;
+
 			foreach (Vector3Int position in positionsInPrefabBounds)
 			{
 				// GameObject wallToInstantiate = dungeonWalls.GetObjectToInstantiate(position);
@@ -185,6 +178,8 @@ public class TilemapGenerator : MonoBehaviour
 				}
 			}
 
+			yield return null;
+
 			foreach (Vector3Int position in positionsInPrefabBounds)
 			{
 				// GameObject wallToInstantiate = dungeonWalls.GetObjectToInstantiate(position);
@@ -198,6 +193,8 @@ public class TilemapGenerator : MonoBehaviour
 					terrainRoofTilemap.SetTile(roofTilePosition, tileToInstantiate);
 				}
 			}
+
+			yield return null;
 		}
 
 		for (int i = -tilemapWidth / 2; i < tilemapWidth / 2; i++)
@@ -275,6 +272,7 @@ public class TilemapGenerator : MonoBehaviour
 					}
 				}
 			}
+
 			yield return null;
 		}
 
