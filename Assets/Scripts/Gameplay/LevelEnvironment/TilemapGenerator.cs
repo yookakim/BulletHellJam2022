@@ -125,9 +125,12 @@ public class TilemapGenerator : MonoBehaviour
 
 		if (chunkCounterForDungeonSpawn >= dungeonSpawnFrequencyChunks)
 		{
+
 			chunkCounterForDungeonSpawn = 0;
 
 			TilemapPrefabContainer dungeonContainer = dungeonPrefab.GetComponent<TilemapPrefabContainer>();
+			// Debug.Log(dungeonContainer.GetGameObjectsList()[0].transform.position);
+			List<GameObject> objectsToInstantiate = dungeonContainer.GetGameObjectsList();
 
 			Tilemap dungeonWalls = dungeonContainer.GetTerrainTilemap();
 			Tilemap dungeonFloor = dungeonContainer.GetGroundTilemap();
@@ -141,6 +144,11 @@ public class TilemapGenerator : MonoBehaviour
 			int spawnMaxY = (chunkHeight / 2) - prefabBounds.size.y / 2;
 
 			Vector3Int spawnPosition = new Vector3Int(Random.Range(spawnMinX, spawnMaxX), Random.Range(spawnMinY, spawnMaxY) + nextChunkY, 0);
+
+			foreach (GameObject gameObject in objectsToInstantiate)
+			{
+				Instantiate(gameObject, gameObject.transform.position + (spawnPosition - prefabBounds.center), gameObject.transform.rotation);
+			}
 
 			BoundsInt.PositionEnumerator positionsInPrefabBounds = prefabBounds.allPositionsWithin;
 

@@ -8,6 +8,8 @@ public class TilemapManager : MonoBehaviour
 	[SerializeField] private Tilemap terrainTilemap;
 	[SerializeField] private Tilemap terrainRoofTilemap;
 
+	[SerializeField] private float randomSearchRetryAngleInterval;
+
 	private void Awake()
 	{
 		// terrainTilemap = GetComponent<Tilemap>();
@@ -75,5 +77,49 @@ public class TilemapManager : MonoBehaviour
 	{
 		yield return new WaitForEndOfFrame();
 		terrainTilemap.SetTile(position, tileToReplace);
+	}
+
+	public static Vector2 GetRandomNearbyLocation(Vector2 position, float distance, float randomSearchRetryAngleInterval)
+	{
+		Vector2 positionToReturn = Vector2.zero;
+
+		bool randomPositionFound = false;
+		int antiFreezeCounter = 0; // LMAO
+		float searchAngleIncrement = 0;
+
+		float randomRotateAngle = Random.Range(0, 360);
+		Vector2 randomDirection = HelperFunctions.RotateVectorRad(Vector2.up, randomRotateAngle * Mathf.Deg2Rad);
+
+		while (!randomPositionFound)
+		{
+
+
+			Vector2 incrementedSearchDirection = HelperFunctions.RotateVectorRad(randomDirection, searchAngleIncrement * Mathf.Deg2Rad);
+
+			RaycastHit2D raycastCheck = Physics2D.Raycast(position, incrementedSearchDirection, distance, LayerMask.GetMask("Destructible"));
+
+			if (raycastCheck.collider == null)
+			{
+				positionToReturn = position + (randomDirection * distance);
+				// Debug.Log(randomDirection);
+				randomPositionFound = true;
+			}
+			else
+			{
+				// Debug.Log("check ran into terrain, checking again: " + raycastCheck.collider.gameObject);
+			}
+
+			antiFreezeCounter++;
+
+			if (antiFreezeCounter >= (360 / randomSearchRetryAngleInterval))
+			{
+				Debug.LogError("Could not find any suitable destination, exiting to avoid freeze");
+				return position;
+			}
+
+			searchAngleIncrement += randomSearchRetryAngleInterval;
+		}
+
+		return positionToReturn;
 	}
 }

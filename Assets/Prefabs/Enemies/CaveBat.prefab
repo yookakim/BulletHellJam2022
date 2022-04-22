@@ -250,10 +250,10 @@ MonoBehaviour:
   timeInRepositionPhase: 2
   repositionDestinationReached: 0
   randomMoveDistance: 1
-  repositionDistance: 5
+  repositionDistance: 2
   randomMoveInterval: 0.2
-  randomRepositionInterval: 0.4
-  repositionSpeedMultiplier: 3.5
+  randomRepositionInterval: 0.2
+  repositionSpeedMultiplier: 4
   randomSearchRetryAngleInterval: 15
 --- !u!114 &5908812777612302432
 MonoBehaviour:

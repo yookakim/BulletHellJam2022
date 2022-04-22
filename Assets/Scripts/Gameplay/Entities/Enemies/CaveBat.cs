@@ -49,47 +49,7 @@ public class CaveBat : Entity
 
     public Vector2 GetRandomNearbyPosition(float distance)
 	{
-        Vector2 positionToReturn = Vector2.zero;
-
-
-
-        bool randomPositionFound = false;
-        int antiFreezeCounter = 0; // LMAO
-        float searchAngleIncrement = 0;
-
-        float randomRotateAngle = Random.Range(0, 360);
-        Vector2 randomDirection = HelperFunctions.RotateVectorRad(Vector2.up, randomRotateAngle * Mathf.Deg2Rad);
-
-        while (!randomPositionFound)
-		{
-            
-            
-            Vector2 incrementedSearchDirection = HelperFunctions.RotateVectorRad(randomDirection, searchAngleIncrement * Mathf.Deg2Rad);
-
-            RaycastHit2D raycastCheck = Physics2D.Raycast(transform.position, incrementedSearchDirection, distance, LayerMask.GetMask("Destructible"));
-
-			if (raycastCheck.collider == null)
-			{
-                positionToReturn = (Vector2)transform.position + (randomDirection * distance);
-                randomPositionFound = true;
-            }
-			else
-			{
-                // Debug.Log("check ran into terrain, checking again: " + raycastCheck.collider.gameObject);
-			}
-
-            antiFreezeCounter++;
-
-			if (antiFreezeCounter >= (360 / randomSearchRetryAngleInterval))
-			{
-                Debug.LogError("Could not find any suitable destination, exiting to avoid freeze");
-                return transform.position;
-			}
-
-            searchAngleIncrement += randomSearchRetryAngleInterval;
-        }
-
-        return positionToReturn;
+        return TilemapManager.GetRandomNearbyLocation(transform.position, distance, randomSearchRetryAngleInterval);
 	}
 
     public void MoveToRandomNearbyLocation()

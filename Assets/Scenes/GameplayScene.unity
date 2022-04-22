@@ -395,7 +395,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 104253259}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.0644999, z: -10.01}
+  m_LocalPosition: {x: 0, y: 8.6245, z: -10.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -593,12 +593,12 @@ MonoBehaviour:
   noiseYScale: 2
   offsetMultiplier: 0.010101011
   minimumDistanceBetweenRooms: 12
-  addTileNoiseOutputThreshold: 0.37
+  addTileNoiseOutputThreshold: 0.33
   potentialRoomLocationThreshold: 0.65
   fleshTileSpawnRange: 0
-  dungeonSpawnFrequencyChunks: 3
+  dungeonSpawnFrequencyChunks: 5
   skellySpawnRate: 0.015
-  caveBatSpawnRate: 0.006
+  caveBatSpawnRate: 0.007
   skellyPrefab: {fileID: 6803426168261079972, guid: 4598aadbc1525524597dfa8882c747a9, type: 3}
   caveBatPrefab: {fileID: 6803426168261079972, guid: 1f00e9d2031e99548a57cd0e56d0b534, type: 3}
   mapEdgeTile: {fileID: 11400000, guid: 813873c41fdc51340ac90ac3b6fbc4f0, type: 2}
@@ -630,6 +630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainTilemap: {fileID: 797249300}
   terrainRoofTilemap: {fileID: 1465043181}
+  randomSearchRetryAngleInterval: 0
 --- !u!1 &455440270
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,7 +887,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532257077}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.0644999, z: -10.01}
+  m_LocalPosition: {x: 0, y: 8.6245, z: -10.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1439,7 +1440,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1594816169
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1712,7 +1713,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6803426168261079970, guid: cbd05d4b1bca41a49b1b43d0ad28d732, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.069901
+      value: -0.84
       objectReference: {fileID: 0}
     - target: {fileID: 6803426168261079970, guid: cbd05d4b1bca41a49b1b43d0ad28d732, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1964,7 +1965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8589835605523327344, guid: 13cdbcdc36f45d449acdeec64d6e3a62, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 5.31
       objectReference: {fileID: 0}
     - target: {fileID: 8589835605523327344, guid: 13cdbcdc36f45d449acdeec64d6e3a62, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2001,6 +2002,10 @@ PrefabInstance:
     - target: {fileID: 8589835605523327350, guid: 13cdbcdc36f45d449acdeec64d6e3a62, type: 3}
       propertyPath: m_Name
       value: knight_v2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589835605523327353, guid: 13cdbcdc36f45d449acdeec64d6e3a62, type: 3}
+      propertyPath: maxHealth
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13cdbcdc36f45d449acdeec64d6e3a62, type: 3}

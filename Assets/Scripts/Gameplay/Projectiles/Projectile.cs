@@ -126,7 +126,6 @@ public class Projectile : MonoBehaviour
 
 		if (collision.transform.parent.gameObject.layer == LayerMask.NameToLayer("Destructible") && NumberBounces > 0 && !alreadyCollidedThisFrame)
 		{
-			Debug.Log("projectile hit box collider");
 
 			LayerMask destructibleMask = LayerMask.GetMask("Destructible");
 
@@ -140,7 +139,6 @@ public class Projectile : MonoBehaviour
 			Vector2 positionToCheck = transform.position;
 
 			Debug.DrawLine(transform.position, transform.position + (collision.transform.position - transform.position));
-			Debug.Log(tileToBounceOffOf.fraction);
 			if (tileToBounceOffOf.fraction == 0)
 			{
 				RaycastHit2D[] hitTiles = Physics2D.RaycastAll(
@@ -180,8 +178,6 @@ public class Projectile : MonoBehaviour
 					Vector2.up,
 					-Vector2.up,
 				}.OrderByDescending(v => Vector2.Dot(dir, v)).First();
-
-				Debug.Log("Normal: " + normal);
 
 				rb.velocity = Vector2.Reflect(rb.velocity, normal);
 			}

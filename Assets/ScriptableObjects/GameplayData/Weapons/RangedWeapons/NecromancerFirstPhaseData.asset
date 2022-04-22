@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NecromancerFirstPhaseData
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 6435513250006416299, guid: 2c501a800185ae944a7f6a39e560761c, type: 3}
-  useRate: 1.1
+  useRate: 1.2
   clusterTimeLength: 0.175
   individualFireInterval: 0.03
   initialAngleOffset: 0
@@ -21,7 +21,7 @@ MonoBehaviour:
   maxAngle: 360
   launchForce: 6.9
   individualSpawnInaccuracy: 0
-  individualTargetInaccuracy: 30
+  individualTargetInaccuracy: 35
   directionFacesTarget: 0
   clusterFliesTowardsTarget: 0
   clusterIgnoresWeaponTarget: 1

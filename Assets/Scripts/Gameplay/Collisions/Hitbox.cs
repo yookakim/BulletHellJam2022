@@ -42,7 +42,6 @@ public class Hitbox : MonoBehaviour
 
 		if (ownerLayer == LayerMask.NameToLayer("Destructible"))
 		{
-			Debug.Log("destructible's hitbox just detected projectile");
 
 			if (projectile.NumberBounces < 1 && projectile.ProjectileAlignment != ownerAlignment)
 			{

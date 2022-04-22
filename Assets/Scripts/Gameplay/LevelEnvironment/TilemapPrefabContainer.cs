@@ -8,6 +8,7 @@ public class TilemapPrefabContainer : MonoBehaviour
     [SerializeField] Tilemap groundTiles;
     [SerializeField] Tilemap terrainTiles;
     [SerializeField] Tilemap roofTiles;
+	[SerializeField] List<GameObject> objectsToInstantiate;
 
 	public BoundsInt GetBoundsOfPrefabTilemap()
 	{
@@ -49,5 +50,18 @@ public class TilemapPrefabContainer : MonoBehaviour
 
 		groundTiles.CompressBounds();
 		return tilemap;
+	}
+
+	public List<GameObject> GetGameObjectsList()
+	{
+		if (objectsToInstantiate.Count >= 1)
+		{
+			return objectsToInstantiate;
+		}
+		else
+		{
+			Debug.LogError("No GameObjects found in objects list for room prefab");
+			return null;
+		}
 	}
 }
