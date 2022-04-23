@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 873311347496822178}
   - component: {fileID: 9058749343538684005}
   - component: {fileID: 3658705895959949767}
+  - component: {fileID: 8660078153371075635}
   m_Layer: 11
   m_Name: Necromancer
   m_TagString: Untagged
@@ -223,7 +224,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: a4976f5b6d703d94e908c47af7c93088, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -339,6 +340,7 @@ MonoBehaviour:
   health: {fileID: 5908812777612302432}
   movement: {fileID: 5246072126135989320}
   weaponController: {fileID: 5743348032518149226}
+  entityTweenFX: {fileID: 8660078153371075635}
   entityStatusEffects: {fileID: 2123895982578609355}
   entityMass: 5
   playerTargetTransform: {fileID: 11400000, guid: f11283cdff44a724ab52be0d8f04fb5b, type: 2}
@@ -347,8 +349,8 @@ MonoBehaviour:
   - {fileID: 5907875416897876250}
   - {fileID: 1909985464409666981}
   - {fileID: 4111983881698086335}
-  idleToOneTransitionTime: 4
-  phaseOneTimeLength: 2
+  idleToOneTransitionTime: 2
+  phaseOneTimeLength: 7
   oneToTwoTransitionTime: 3
   phaseTwoTimeLength: 5
   twoToOneTransitionTime: 5
@@ -369,7 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b987dc5f1701c449f03d6fc212c5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 160
+  maxHealth: 180
 --- !u!114 &5246072126135989320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,7 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486c32b65c03efa4cae7842ed0ab5ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: c63ab2847c35e324aadb3085967a9f4b, type: 2}
+  weaponData: {fileID: 11400000, guid: 66aa4f42f2e3ffb4aa5c244824f71b96, type: 2}
   weaponOwner: {fileID: 6803426168261079972}
 --- !u!114 &873311347496822178
 MonoBehaviour:
@@ -472,6 +474,21 @@ MonoBehaviour:
     _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
     _objectReferences:
     - {fileID: 11400000, guid: 1daf47a47e807614ab8449b4e98c7bef, type: 2}
+--- !u!114 &8660078153371075635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6803426168261079972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5cbd6ab8d99d424f8ab330a131dc5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectData: {fileID: 11400000, guid: 61406ca86870b2441884a03ece81efda, type: 2}
+  sprite: {fileID: 6803426168261079971}
+  entityOverlayMaterial: {fileID: 2100000, guid: a4976f5b6d703d94e908c47af7c93088, type: 2}
 --- !u!1 &8117833682845174079
 GameObject:
   m_ObjectHideFlags: 0

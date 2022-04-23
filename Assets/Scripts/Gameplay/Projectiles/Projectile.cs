@@ -11,11 +11,13 @@ public class Projectile : MonoBehaviour
 	public float LaunchForce { get; set; }
 	public float InaccuracyForDelayedStart { get; set; }
 	public int NumberBounces { get; set; }
+	public bool SpriteFacesTarget { get; set; }
 
 	public Transform LiveTarget { get; set; }
 
 	[SerializeField] private ProjectileData projectileData;
 	[SerializeField] private DamageComponent projectileDamageComponent;
+	[SerializeField] private Transform childSpriteTransform;
 	
 	private bool accelerating;
 	private float accelerateForce;
@@ -77,24 +79,22 @@ public class Projectile : MonoBehaviour
 			if (projectileData.setTargetAfterDelay && LiveTarget != null && !directionSet)
 			{
 				Direction = ((Vector2)LiveTarget.position - (Vector2)transform.position).normalized;
-
+				// transform.up = Direction;
 				float inaccuracy = Random.Range(-InaccuracyForDelayedStart / 2, InaccuracyForDelayedStart / 2);
 
 				Direction = HelperFunctions.RotateVectorRad(Direction, inaccuracy * Mathf.Deg2Rad);
 
 				rb.AddForce(Direction * LaunchForce, ForceMode2D.Impulse);
 				directionSet = true;
-
-
+				Debug.Log("wtf");
 			}
 
 			rb.AddForce(Direction * accelerateForce, ForceMode2D.Force);
 		}
-
+		
 		if (!projectileData.setTargetAfterDelay && !directionSet)
 		{
 			rb.AddForce(Direction * LaunchForce, ForceMode2D.Impulse);
-
 			directionSet = true;
 		}
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NecromancerFireMinionAttack
   m_EditorClassIdentifier: 
   projectileDamage: 1
-  projectileLifetime: 20
+  projectileLifetime: 8
   projectileAlignment: 1
   knockbackForce: 0
   numberBounces: 3

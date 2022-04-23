@@ -44,4 +44,9 @@ public class WeaponController : MonoBehaviour
 		CustomEvent.Trigger(gameObject, "WeaponUsed");
 		weaponData.UseWeapon(this);
 	}
+
+	public void CancelTweens()
+	{
+		LeanTween.cancel(gameObject);
+	}
 }

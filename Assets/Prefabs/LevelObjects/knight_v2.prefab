@@ -168,7 +168,7 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.25}
+  m_Offset: {x: 0, y: -0.12}
   m_Size: {x: 0.5, y: 0.5}
   m_Direction: 0
 --- !u!1 &8589835605241206696
@@ -298,6 +298,7 @@ GameObject:
   - component: {fileID: 8589835605523327359}
   - component: {fileID: 8589835605523327356}
   - component: {fileID: 5438939085133954746}
+  - component: {fileID: 7279774076819333043}
   m_Layer: 7
   m_Name: knight_v2
   m_TagString: Untagged
@@ -345,7 +346,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a4976f5b6d703d94e908c47af7c93088, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -411,6 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransformReference: {fileID: 11400000, guid: f11283cdff44a724ab52be0d8f04fb5b, type: 2}
+  playerHealthEvent: {fileID: 11400000, guid: fe9a7447e3d5b5749998e0361f07a2dd, type: 2}
 --- !u!114 &8589835605523327347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,7 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d997b8fbf9d6d42abb0270a323ccb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 3.5
 --- !u!114 &8589835605523327353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,7 +438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b987dc5f1701c449f03d6fc212c5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 20
 --- !u!114 &8589835605523327359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,3 +493,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeData: {fileID: 11400000, guid: 284f428c33189c34993f2b7faec8db9c, type: 2}
   meleeOwner: {fileID: 8589835605523327350}
+--- !u!114 &7279774076819333043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8589835605523327350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5cbd6ab8d99d424f8ab330a131dc5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectData: {fileID: 11400000, guid: 61406ca86870b2441884a03ece81efda, type: 2}
+  sprite: {fileID: 8589835605523327345}
+  entityOverlayMaterial: {fileID: 2100000, guid: a4976f5b6d703d94e908c47af7c93088, type: 2}

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileDamage: 5
   projectileLifetime: 5
-  projectileAlignment: 0
+  projectileAlignment: 1
   knockbackForce: 5
   numberBounces: 0
   accelerating: 1
-  accelerationAmount: 0
+  accelerationAmount: 8
   accelerationDelay: 0.35
   setTargetAfterDelay: 1
   rotating: 0

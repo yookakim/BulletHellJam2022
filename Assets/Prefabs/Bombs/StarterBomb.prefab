@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6616692297731261145}
   - component: {fileID: 169374601995178532}
   - component: {fileID: 8222943758045696163}
+  - component: {fileID: 4231630843453453230}
   m_Layer: 8
   m_Name: StarterBomb
   m_TagString: Untagged
@@ -197,6 +198,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.28
+--- !u!114 &4231630843453453230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823305739645613985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03008d3ed3c26b04aaf874c64a8ff410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &949084151301768738
 GameObject:
   m_ObjectHideFlags: 0

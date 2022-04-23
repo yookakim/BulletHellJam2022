@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StarterRevolverData
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 6435513250006416299, guid: fff5a4a0421d554409a5d76072d14526, type: 3}
-  useRate: 3.5
+  useRate: 2.8
   launchForce: 15
   clusterAccuracyDeviation: 1
   individualAccuracyDeviation: 0

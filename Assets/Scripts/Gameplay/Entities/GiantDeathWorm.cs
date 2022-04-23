@@ -27,6 +27,6 @@ public class GiantDeathWorm : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		rb.MovePosition(rb.position + new Vector2(0, 2f) * Time.fixedDeltaTime);
+		rb.MovePosition(rb.position + new Vector2(0, 0.75f) * Time.fixedDeltaTime);
 	}
 }

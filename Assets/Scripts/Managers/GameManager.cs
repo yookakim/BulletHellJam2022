@@ -4,7 +4,21 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameStateEvent gameStateChangedEvent;
+	public static GameManager Instance { get; private set; }
+	private void Awake()
+	{
+		if (Instance != null && Instance != this)
+		{
+			Debug.LogError("Multiple instances of singleton GameManager");
+			Destroy(this);
+		}
+		else
+		{
+			Instance = this;
+		}
+	}
+
+	[SerializeField] private GameStateEvent gameStateChangedEvent;
 	public GameState CurrentGameState
 	{
 		get => currentGameState;
@@ -13,6 +27,7 @@ public class GameManager : MonoBehaviour
 
 	public enum GameState
 	{
+		LoadLevelState,
         PreGameState,
         InGameState,
         PostGameState
@@ -23,7 +38,8 @@ public class GameManager : MonoBehaviour
 	public void OnGameplaySceneLoadCompleted()
 	{
 		// Event called when gameplay scene finishes loading in SceneLoader.
-		ChangeState(GameState.PreGameState);
+		Debug.Log("finished loading scene");
+		ChangeState(GameState.LoadLevelState);
 
 	}
 

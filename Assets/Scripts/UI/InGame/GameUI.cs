@@ -7,7 +7,12 @@ public class GameUI : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] private GameEvent RequestMenuLoadEvent;
 
-    public void OnReturnToMenuButtonClicked()
+	private void Awake()
+	{
+		Debug.Log("awake in GameUI");
+	}
+
+	public void OnReturnToMenuButtonClicked()
 	{
         RequestMenuLoadEvent.Raise();
 	}
@@ -19,5 +24,9 @@ public class GameUI : MonoBehaviour
     public void OnGameStateChanged(GameManager.GameState newState)
 	{
         Debug.Log(newState);
+		if (newState == GameManager.GameState.LoadLevelState)
+		{
+
+		}
 	}
 }

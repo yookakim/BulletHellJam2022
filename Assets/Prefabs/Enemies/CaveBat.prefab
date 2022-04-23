@@ -85,6 +85,7 @@ GameObject:
   - component: {fileID: 873311347496822178}
   - component: {fileID: 9058749343538684005}
   - component: {fileID: 3658705895959949767}
+  - component: {fileID: 1549296501292346820}
   m_Layer: 11
   m_Name: CaveBat
   m_TagString: Untagged
@@ -128,7 +129,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: a4976f5b6d703d94e908c47af7c93088, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -244,6 +245,7 @@ MonoBehaviour:
   health: {fileID: 5908812777612302432}
   movement: {fileID: 5246072126135989320}
   weaponController: {fileID: 5743348032518149226}
+  entityTweenFX: {fileID: 1549296501292346820}
   entityStatusEffects: {fileID: 2123895982578609355}
   entityMass: 1
   timeInAttackPhase: 3
@@ -370,3 +372,18 @@ MonoBehaviour:
     _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
     _objectReferences:
     - {fileID: 11400000, guid: a7e95b5cad50d9743909219606ee2d80, type: 2}
+--- !u!114 &1549296501292346820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6803426168261079972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5cbd6ab8d99d424f8ab330a131dc5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectData: {fileID: 11400000, guid: 61406ca86870b2441884a03ece81efda, type: 2}
+  sprite: {fileID: 6803426168261079971}
+  entityOverlayMaterial: {fileID: 2100000, guid: a4976f5b6d703d94e908c47af7c93088, type: 2}

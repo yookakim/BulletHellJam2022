@@ -83,6 +83,7 @@ GameObject:
   - component: {fileID: 5743348032518149226}
   - component: {fileID: 9058749343538684005}
   - component: {fileID: 3658705895959949767}
+  - component: {fileID: 6244720269227915735}
   m_Layer: 11
   m_Name: NecromancerFireMinion
   m_TagString: Untagged
@@ -126,7 +127,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: a4976f5b6d703d94e908c47af7c93088, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -175,8 +176,9 @@ MonoBehaviour:
   health: {fileID: 5908812777612302432}
   movement: {fileID: 5246072126135989320}
   weaponController: {fileID: 5743348032518149226}
+  entityTweenFX: {fileID: 6244720269227915735}
   entityStatusEffects: {fileID: 2123895982578609355}
-  entityMass: 0
+  entityMass: 1
   speedDecelerationLerpAmount: 0.04
   speedDecelerationLerpRandomRange: 0.05
   initialSpeedMultiplier: 1.3
@@ -245,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b987dc5f1701c449f03d6fc212c5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
+  maxHealth: 45
 --- !u!114 &5246072126135989320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,7 +291,7 @@ MonoBehaviour:
   entity: {fileID: 1530502501891915392}
   entityHealth: {fileID: 5908812777612302432}
   entityMovement: {fileID: 5246072126135989320}
-  immuneToKnockback: 0
+  immuneToKnockback: 1
 --- !u!114 &5743348032518149226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,3 +336,18 @@ MonoBehaviour:
   _data:
     _json: '{"nest":{"source":"Macro","macro":null,"embed":null}}'
     _objectReferences: []
+--- !u!114 &6244720269227915735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6803426168261079972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5cbd6ab8d99d424f8ab330a131dc5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectData: {fileID: 11400000, guid: 61406ca86870b2441884a03ece81efda, type: 2}
+  sprite: {fileID: 6803426168261079971}
+  entityOverlayMaterial: {fileID: 2100000, guid: a4976f5b6d703d94e908c47af7c93088, type: 2}

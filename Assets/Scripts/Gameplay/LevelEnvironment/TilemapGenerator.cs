@@ -5,6 +5,8 @@ using UnityEngine.Tilemaps;
 
 public class TilemapGenerator : MonoBehaviour
 {
+	public Transform PlayerTransform { get; set; }
+
 	[SerializeField] private int tilemapWidth;
 	[SerializeField] private int chunkHeight;
 
@@ -73,7 +75,7 @@ public class TilemapGenerator : MonoBehaviour
 		// if Y of player is less than 24 from last generated chunk Y, generate chunk
 		// make sure we don't start a new chunk generation when we are in the middle of one
 		// (nextChunkY doesn't get updated for the next several frames the chunk is getting loaded)
-		if ((testPlayerTransform.position.y >= nextChunkY - 32) && !currentlyGeneratingChunk)
+		if ((PlayerTransform.position.y >= nextChunkY - 32) && !currentlyGeneratingChunk)
 		{
 			// GenerateNextChunk();
 			StartCoroutine(GenerateNextChunkAsync());

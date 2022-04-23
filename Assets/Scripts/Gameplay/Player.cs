@@ -5,12 +5,14 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 	[SerializeField] private TransformReference playerTransformReference;
+	[SerializeField] private HealthEvent playerHealthEvent;
 
 	private PlayerInputController inputController;
 	private Movement movement;
 	private Health health;
 	private PlayerBombLauncher bombLauncher;
 	private WeaponController weaponController;
+	private EntityTweenEffects entityTweenFX;
 	private MeleeController meleeController;
 	private Hitbox hitbox;
 
@@ -21,10 +23,16 @@ public class Player : MonoBehaviour
 		health = GetComponent<Health>();
 		bombLauncher = GetComponent<PlayerBombLauncher>();
 		weaponController = GetComponentInChildren<WeaponController>();
+		entityTweenFX = GetComponent<EntityTweenEffects>();
 		meleeController = GetComponent<MeleeController>();
 		hitbox = GetComponentInChildren<Hitbox>();
 
 		playerTransformReference.reference = transform;
+	}
+
+	private void Start()
+	{
+		playerHealthEvent.Raise(health);
 	}
 
 	private void Update()
@@ -59,19 +67,27 @@ public class Player : MonoBehaviour
 	{
 		hitbox.hitboxTriggeredEvent += OnHitboxTrigger;
 		health.HealthZeroEvent += OnHealthZero;
+		health.HealthChangedEvent += OnHealthChanged;
 	}
 
 	private void OnDisable()
 	{
 		hitbox.hitboxTriggeredEvent -= OnHitboxTrigger;
 		health.HealthZeroEvent -= OnHealthZero;
+		health.HealthChangedEvent -= OnHealthChanged;
 	}
 
 	private void OnHealthZero(GameObject deadPlayerObject)
 	{
 		// put player into dead state later
-
+		entityTweenFX.CancelAllTweens();
+		weaponController.CancelTweens();
 		Time.timeScale = 0;
+	}
+
+	private void OnHealthChanged(Health health, int currentHealth)
+	{
+		playerHealthEvent.Raise(health);
 	}
 
 	private void OnHitboxTrigger(GameObject objectHitBy)
@@ -80,9 +96,22 @@ public class Player : MonoBehaviour
 
 		if (gameObjectDamageComponent != null)
 		{
-			if (gameObjectDamageComponent.DamageAlignment != hitbox.ownerAlignment)
+			if (gameObjectDamageComponent.DamageAlignment != hitbox.ownerAlignment || gameObjectDamageComponent.HitsAllies)
 			{
-				health.DealDamage(gameObjectDamageComponent.DamageAmount);
+				int damageToDeal = 0;
+
+				Bomb bomb = objectHitBy.GetComponent<Bomb>();
+
+				if (bomb != null)
+				{
+					damageToDeal = (int)(gameObjectDamageComponent.DamageAmount * bomb.FriendlyDamageMultiplier);
+				}
+				else
+				{
+					damageToDeal = gameObjectDamageComponent.DamageAmount;
+				}
+				entityTweenFX.OnDamageTween();
+				health.DealDamage(damageToDeal);
 			}
 		}
 	}

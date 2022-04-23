@@ -16,6 +16,7 @@ public class ClusterShooterData : WeaponData
 	public float individualSpawnInaccuracy;
 	public float individualTargetInaccuracy;
 	public bool directionFacesTarget;
+	public bool spriteFacesTarget;
 	public bool clusterFliesTowardsTarget;
 	public bool clusterIgnoresWeaponTarget;
 	public float spawnDistanceFromWeapon;
@@ -48,7 +49,7 @@ public class ClusterShooterData : WeaponData
 		float currentTimeElapsedInterval = 0;
 		int currentProjectileCount = 0;
 
-		LeanTween.value(0, clusterTimeLength, clusterTimeLength).setEase(LeanTweenType.linear).setOnUpdate((float val) =>
+		LeanTween.value(weaponController.gameObject, 0, clusterTimeLength, clusterTimeLength).setEase(LeanTweenType.linear).setOnUpdate((float val) =>
 		{
 			currentTimeElapsedInterval += Time.deltaTime;
 			if (currentTimeElapsedInterval >= individualFireInterval)
@@ -118,4 +119,8 @@ public class ClusterShooterData : WeaponData
 
 	}
 
+	public void CancelClusterTweens(GameObject gameObject)
+	{
+		LeanTween.cancel(gameObject);
+	}
 }

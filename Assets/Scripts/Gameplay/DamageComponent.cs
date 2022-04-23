@@ -20,4 +20,12 @@ public class DamageComponent : MonoBehaviour
 	private bool hitsAllies;
 	private int damageAmount;
 	private float knockbackForce;
+
+	public void InitializeDamageComponent(Alignment damageAlignment, bool hitsAllies, int damageAmount, float knockbackForce)
+	{
+		this.damageAlignment = damageAlignment;
+		this.hitsAllies = hitsAllies;
+		this.damageAmount = damageAmount;
+		this.knockbackForce = knockbackForce;
+	}
 }

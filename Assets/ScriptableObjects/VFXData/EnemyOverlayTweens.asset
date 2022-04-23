@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f05b51a159cb5419dc8d6dc8cbfaac, type: 3}
+  m_Name: EnemyOverlayTweens
+  m_EditorClassIdentifier: 
+  damageTweenDuration: 0.25
+  damageTweenColor: {r: 6.3621793, g: 0.6302158, b: 0.6302158, a: 1}
+  damageTweenCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0013427734
+      value: 0
+      inSlope: 0.50615895
+      outSlope: 0.50615895
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.15929979
+    - serializedVersion: 3
+      time: 0.45353863
+      value: 0.18819623
+      inSlope: 0.8742548
+      outSlope: 0.8742548
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.22998294
+    - serializedVersion: 3
+      time: 0.7019057
+      value: 0.6419386
+      inSlope: 4.100813
+      outSlope: 4.100813
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.10467499
+    - serializedVersion: 3
+      time: 0.80019706
+      value: 0.9369604
+      inSlope: 0.9578429
+      outSlope: 0.9578429
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.1995789
+    - serializedVersion: 3
+      time: 1
+      value: 1.0000002
+      inSlope: 0.2392809
+      outSlope: 0.2392809
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.31633395
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

@@ -9,6 +9,7 @@ public class Entity : MonoBehaviour
 	[SerializeField] protected Health health;
 	[SerializeField] protected Movement movement;
 	[SerializeField] protected WeaponController weaponController;
+	[SerializeField] protected EntityTweenEffects entityTweenFX;
 	[SerializeField] protected EntityStatusEffects entityStatusEffects;
 	[SerializeField] protected float entityMass;
 
@@ -36,8 +37,8 @@ public class Entity : MonoBehaviour
 		{
 			if (incomingDamageComponent.DamageAlignment != hitbox.ownerAlignment || incomingDamageComponent.HitsAllies)
 			{
-				// entityStatusEffects.ApplyHitstun();
-				Debug.Log("receivign incoming damage");
+				// start flash tween
+				entityTweenFX.OnDamageTween();
 				entityStatusEffects.ApplyKnockback(incomingDamageComponent);
 				health.DealDamage(incomingDamageComponent.DamageAmount);
 			}
@@ -46,6 +47,7 @@ public class Entity : MonoBehaviour
 
 	protected virtual void OnEntityHealthZero(GameObject deadObject)
 	{
-
+		entityTweenFX.CancelAllTweens();
+		weaponController.CancelTweens();
 	}
 }

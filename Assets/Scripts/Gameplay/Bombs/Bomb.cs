@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
+	public float FriendlyDamageMultiplier { get; set; }
+
 	[SerializeField] private BombData bombData;
 	[SerializeField] private SpriteRenderer explosionSprite;
 	[SerializeField] private UnityEngine.Rendering.Universal.Light2D explosionLight;
@@ -16,6 +18,7 @@ public class Bomb : MonoBehaviour
 
 	private Rigidbody2D rb;
 	private SpriteRenderer sprite;
+	private DamageComponent damageComponent;
 	
 	private LayerMask hitboxMask;
 
@@ -26,6 +29,13 @@ public class Bomb : MonoBehaviour
 	{
 		rb = GetComponent<Rigidbody2D>();
 		sprite = GetComponent<SpriteRenderer>();
+		damageComponent = GetComponent<DamageComponent>();
+
+		damageComponent.InitializeDamageComponent(
+			bombData.damageAlignment,
+			bombData.hitsAllies, bombData.damageAmount, bombData.knockbackAmount);
+
+		FriendlyDamageMultiplier = bombData.friendlyDamageMultiplier;
 
 		hitboxMask = LayerMask.GetMask("Hitbox");
 		timeRemaining = bombData.bombTickDownTime;
