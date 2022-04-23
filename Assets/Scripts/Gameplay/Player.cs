@@ -4,8 +4,19 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+	public int CurrentCoinAmount
+	{
+		get => currentCoinAmount;
+		set 
+		{
+			currentCoinAmount = value;
+			coinAmountChangedEvent.Raise(value);
+		} 
+	}
+
 	[SerializeField] private TransformReference playerTransformReference;
 	[SerializeField] private HealthEvent playerHealthEvent;
+	[SerializeField] private IntEvent coinAmountChangedEvent;
 
 	private PlayerInputController inputController;
 	private Movement movement;
@@ -15,6 +26,8 @@ public class Player : MonoBehaviour
 	private EntityTweenEffects entityTweenFX;
 	private MeleeController meleeController;
 	private Hitbox hitbox;
+
+	private int currentCoinAmount;
 
 	private void Awake()
 	{
@@ -33,6 +46,7 @@ public class Player : MonoBehaviour
 	private void Start()
 	{
 		playerHealthEvent.Raise(health);
+		coinAmountChangedEvent.Raise(currentCoinAmount);
 	}
 
 	private void Update()
@@ -113,6 +127,14 @@ public class Player : MonoBehaviour
 				entityTweenFX.OnDamageTween();
 				health.DealDamage(damageToDeal);
 			}
+		}
+
+		Coin coin = objectHitBy.GetComponent<Coin>();
+
+		if (coin != null)
+		{
+			CurrentCoinAmount++;
+			coin.OnPickup();
 		}
 	}
 }

@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13594d1cf70519f45934c7b293f2fa10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityDeadColor: {r: 0, g: 0, b: 0, a: 0}
   sprite: {fileID: 6803426168261079971}
   hitbox: {fileID: 7652225997356876175}
   health: {fileID: 5908812777612302432}
@@ -178,6 +179,7 @@ MonoBehaviour:
   weaponController: {fileID: 5743348032518149226}
   entityTweenFX: {fileID: 6244720269227915735}
   entityStatusEffects: {fileID: 2123895982578609355}
+  rb: {fileID: 4704752586227310896}
   entityMass: 1
   speedDecelerationLerpAmount: 0.04
   speedDecelerationLerpRandomRange: 0.05

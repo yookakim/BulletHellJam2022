@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+	[SerializeField] protected Color entityDeadColor;
 	[SerializeField] protected SpriteRenderer sprite;
     [SerializeField] protected Hitbox hitbox;
 	[SerializeField] protected Health health;
@@ -11,10 +12,19 @@ public class Entity : MonoBehaviour
 	[SerializeField] protected WeaponController weaponController;
 	[SerializeField] protected EntityTweenEffects entityTweenFX;
 	[SerializeField] protected EntityStatusEffects entityStatusEffects;
+	[SerializeField] protected Rigidbody2D rb;
+	[SerializeField] protected CoinSpawner coinSpawner;
+	[SerializeField] protected int coinsDropped;
+	[SerializeField] protected float timeAfterDeathBeforeDestroy;
 	[SerializeField] protected float entityMass;
+	[SerializeField] protected float knockbackForceOnDeath;
 
 	public float EntityMass { get => entityMass; }
+	public float TimeAfterDeathBeforeDestroy { get => timeAfterDeathBeforeDestroy; }
+	public float ElapsedTimeAfterDeath { get; set; }
+	public Hitbox Hitbox { get => hitbox; }
 
+	protected Vector2 directionOfAttackHitBy;
 
 	private void OnEnable()
 	{
@@ -40,6 +50,21 @@ public class Entity : MonoBehaviour
 				// start flash tween
 				entityTweenFX.OnDamageTween();
 				entityStatusEffects.ApplyKnockback(incomingDamageComponent);
+
+				Rigidbody2D rbHitBy = gameObjectHitBy.GetComponent<Rigidbody2D>();
+
+				if (rbHitBy != null)
+				{
+					if (rbHitBy.velocity.magnitude <= 0.01f)
+					{
+						directionOfAttackHitBy = gameObjectHitBy.transform.up;
+					}
+					else
+					{
+						directionOfAttackHitBy = rbHitBy.velocity.normalized;
+					}
+				}
+
 				health.DealDamage(incomingDamageComponent.DamageAmount);
 			}
 		}
@@ -47,7 +72,21 @@ public class Entity : MonoBehaviour
 
 	protected virtual void OnEntityHealthZero(GameObject deadObject)
 	{
+		// entityTweenFX.CancelAllTweens();
+		// weaponController.CancelTweens();
+
+		rb.AddForce(directionOfAttackHitBy * knockbackForceOnDeath, ForceMode2D.Impulse);
+		sprite.color = entityDeadColor;
+		hitbox.gameObject.SetActive(false);
+		GetComponent<Collider2D>().enabled = false;
+	}
+
+	public virtual void FinalDestroy()
+	{
 		entityTweenFX.CancelAllTweens();
 		weaponController.CancelTweens();
+
+		
+		Destroy(gameObject);
 	}
 }

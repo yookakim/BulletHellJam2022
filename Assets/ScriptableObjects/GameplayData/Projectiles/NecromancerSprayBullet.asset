@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c97c6e20f3536404b8503bdf222162a0, type: 3}
   m_Name: NecromancerSprayBullet
   m_EditorClassIdentifier: 
-  projectileDamage: 5
+  projectileDamage: 1
   projectileLifetime: 5
   projectileAlignment: 0
   knockbackForce: 5
+  numberBounces: 0
   accelerating: 1
   accelerationAmount: 8
   accelerationDelay: 0.5
   setTargetAfterDelay: 1
+  rotating: 0
+  rotatingAmount: 0

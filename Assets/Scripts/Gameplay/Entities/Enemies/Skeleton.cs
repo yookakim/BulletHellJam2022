@@ -21,7 +21,16 @@ public class Skeleton : Entity
 		// change state to dead or something later
 		base.OnEntityHealthZero(deadObject);
 		Debug.Log("skelly died");
-		Destroy(deadObject);
+	}
+
+	public override void FinalDestroy()
+	{
+		for (int i = 0; i < coinsDropped; i++)
+		{
+			coinSpawner.SpawnCoin();
+		}
+
+		base.FinalDestroy();
 	}
 
 	public void ChasePlayer()

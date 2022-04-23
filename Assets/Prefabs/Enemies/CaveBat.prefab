@@ -83,6 +83,7 @@ GameObject:
   - component: {fileID: 2123895982578609355}
   - component: {fileID: 5743348032518149226}
   - component: {fileID: 873311347496822178}
+  - component: {fileID: 6512294292264727974}
   - component: {fileID: 9058749343538684005}
   - component: {fileID: 3658705895959949767}
   - component: {fileID: 1549296501292346820}
@@ -173,8 +174,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 2
-  m_LinearDrag: 0
+  m_Mass: 12
+  m_LinearDrag: 8
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 0191c138c81c1d74bb0b38e566b44cc0, type: 2}
@@ -240,6 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8654a7ff8f39c040b403cd204888c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityDeadColor: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
   sprite: {fileID: 6803426168261079971}
   hitbox: {fileID: 7652225997356876175}
   health: {fileID: 5908812777612302432}
@@ -247,7 +249,12 @@ MonoBehaviour:
   weaponController: {fileID: 5743348032518149226}
   entityTweenFX: {fileID: 1549296501292346820}
   entityStatusEffects: {fileID: 2123895982578609355}
+  rb: {fileID: 4704752586227310896}
+  coinSpawner: {fileID: 6512294292264727974}
+  coinsDropped: 5
+  timeAfterDeathBeforeDestroy: 1.2
   entityMass: 1
+  knockbackForceOnDeath: 100
   timeInAttackPhase: 3
   timeInRepositionPhase: 2
   repositionDestinationReached: 0
@@ -341,6 +348,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookMode: 0
+--- !u!114 &6512294292264727974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6803426168261079972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e00ac5a87bfa66240bec06179f7ea5e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinToSpawn: {fileID: 6577949691152341398, guid: b93f91fe7913f9b4a967def700b5a821, type: 3}
 --- !u!114 &9058749343538684005
 MonoBehaviour:
   m_ObjectHideFlags: 0

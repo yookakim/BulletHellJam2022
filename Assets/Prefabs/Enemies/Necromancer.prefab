@@ -268,8 +268,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 2
-  m_LinearDrag: 0
+  m_Mass: 20
+  m_LinearDrag: 8
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 0191c138c81c1d74bb0b38e566b44cc0, type: 2}
@@ -335,6 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f66911891b40124c8cc37de12000781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityDeadColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
   sprite: {fileID: 6803426168261079971}
   hitbox: {fileID: 7652225997356876175}
   health: {fileID: 5908812777612302432}
@@ -342,7 +343,12 @@ MonoBehaviour:
   weaponController: {fileID: 5743348032518149226}
   entityTweenFX: {fileID: 8660078153371075635}
   entityStatusEffects: {fileID: 2123895982578609355}
+  rb: {fileID: 4704752586227310896}
+  coinSpawner: {fileID: 0}
+  coinsDropped: 0
+  timeAfterDeathBeforeDestroy: 1.2
   entityMass: 5
+  knockbackForceOnDeath: 0
   playerTargetTransform: {fileID: 11400000, guid: f11283cdff44a724ab52be0d8f04fb5b, type: 2}
   playerScanRaycast: {fileID: 4133744691020497599}
   necromancerAttacks:
@@ -371,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b987dc5f1701c449f03d6fc212c5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 180
+  maxHealth: 10
 --- !u!114 &5246072126135989320
 MonoBehaviour:
   m_ObjectHideFlags: 0

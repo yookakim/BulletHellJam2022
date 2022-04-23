@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemyOverlayTweens
   m_EditorClassIdentifier: 
   damageTweenDuration: 0.25
-  damageTweenColor: {r: 6.3621793, g: 0.6302158, b: 0.6302158, a: 1}
+  damageTweenColor: {r: 10.603828, g: 2.9726214, b: 2.9726214, a: 1}
   damageTweenCurve:
     serializedVersion: 2
     m_Curve:

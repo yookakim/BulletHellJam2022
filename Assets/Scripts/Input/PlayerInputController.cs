@@ -15,8 +15,8 @@ public class PlayerInputController
 
 	public PlayerInputController(Camera camera)
 	{
-		// cam = camera;
-		cam = Camera.main;
+		cam = camera;
+		// cam = Camera.main;
 	}
 
 	public void ReadInput()

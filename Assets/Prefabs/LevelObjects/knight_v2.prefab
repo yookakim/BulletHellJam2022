@@ -220,7 +220,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.715
   m_Color: {r: 0.8490566, g: 0.72919685, b: 0.54067284, a: 0.64705884}
-  m_Intensity: 0.92
+  m_Intensity: 0.75
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -413,6 +413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransformReference: {fileID: 11400000, guid: f11283cdff44a724ab52be0d8f04fb5b, type: 2}
   playerHealthEvent: {fileID: 11400000, guid: fe9a7447e3d5b5749998e0361f07a2dd, type: 2}
+  coinAmountChangedEvent: {fileID: 11400000, guid: 41481adb23d7f2a4d9540ff1bfb9b542, type: 2}
 --- !u!114 &8589835605523327347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,7 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312ac5099a71c944b9661832f46ec1c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchStrength: 160
+  launchStrength: 20
   bombPrefab: {fileID: 823305739645613985, guid: cff37d7fdaf7392408dbdb9ba14e08dd, type: 3}
 --- !u!61 &8589835605523327356
 BoxCollider2D:

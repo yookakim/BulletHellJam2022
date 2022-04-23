@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameUI : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private GameEvent RequestMenuLoadEvent;
+    [SerializeField] private GameEvent requestMenuLoadEvent;
+	[SerializeField] private TMP_Text coinAmountText;
+	[SerializeField] private TMP_Text testbuttontext;
 
 	private void Awake()
 	{
@@ -14,7 +18,7 @@ public class GameUI : MonoBehaviour
 
 	public void OnReturnToMenuButtonClicked()
 	{
-        RequestMenuLoadEvent.Raise();
+        requestMenuLoadEvent.Raise();
 	}
 
     /// <summary>
@@ -28,5 +32,18 @@ public class GameUI : MonoBehaviour
 		{
 
 		}
+	}
+
+	public void RefreshCoinAmount(int newAmount)
+	{
+		Debug.Log("laser focused");
+
+
+		coinAmountText.text = ("x" + newAmount).ToString();
+		coinAmountText.ClearMesh();
+		coinAmountText.SetAllDirty();
+		coinAmountText.ForceMeshUpdate(true, true);
+
+		testbuttontext.text = "lol wtf";
 	}
 }

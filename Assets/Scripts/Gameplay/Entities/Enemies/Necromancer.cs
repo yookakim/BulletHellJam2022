@@ -74,7 +74,6 @@ public class Necromancer : Entity
 		// change state to dead or something later
 		necromancerDiedEvent?.Invoke();
 		base.OnEntityHealthZero(deadObject);
-		Destroy(deadObject);
 	}
 
 	public void PhaseOne()

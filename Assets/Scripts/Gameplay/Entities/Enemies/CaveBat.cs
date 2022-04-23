@@ -40,11 +40,21 @@ public class CaveBat : Entity
         base.OnHit(gameObjectHitBy);
     }
 
+    public override void FinalDestroy()
+    {
+        for (int i = 0; i < coinsDropped; i++)
+        {
+            coinSpawner.SpawnCoin();
+        }
+
+        base.FinalDestroy();
+    }
+
     protected override void OnEntityHealthZero(GameObject deadObject)
     {
         // change state to dead or something later
         base.OnEntityHealthZero(deadObject);
-        Destroy(deadObject);
+        // Destroy(deadObject);
     }
 
     public Vector2 GetRandomNearbyPosition(float distance)

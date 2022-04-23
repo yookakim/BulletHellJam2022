@@ -17,7 +17,7 @@ public class NecromancerFireMinion : Entity
 	[SerializeField] private float randomMoveDistance;
 	[SerializeField] private float spinRate;
 
-	private Rigidbody2D rb;
+	// private Rigidbody2D rb;
 
 	private float currentMoveSpeedMultiplier;
 	private float elapsedLifetime;
@@ -26,7 +26,7 @@ public class NecromancerFireMinion : Entity
 
 	private void Awake()
 	{
-		rb = GetComponent<Rigidbody2D>();
+		// rb = GetComponent<Rigidbody2D>();
 		currentMoveSpeedMultiplier = initialSpeedMultiplier + Random.Range(-initialMultiplierRandomRange / 2, initialMultiplierRandomRange / 2);
 		speedDecelerationLerpAmount = speedDecelerationLerpAmount + Random.Range(-speedDecelerationLerpRandomRange / 2, speedDecelerationLerpRandomRange / 2);
 		spinVector = Vector2.up;
