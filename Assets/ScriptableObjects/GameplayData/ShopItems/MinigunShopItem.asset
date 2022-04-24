@@ -16,4 +16,5 @@ MonoBehaviour:
   itemName: Minigun
   itemDescription: Shoot really, really fast.
   itemIcon: {fileID: 21300000, guid: f7c4c22d548bb7e428c67dcccb0a3b20, type: 3}
+  shopInteractablePrefab: {fileID: 6462261664468512210, guid: 1e26b34bac27f5f428519c41ebe82aae, type: 3}
   weaponData: {fileID: 11400000, guid: eb9354a5e50f09f4f95e89a02a72a15d, type: 2}

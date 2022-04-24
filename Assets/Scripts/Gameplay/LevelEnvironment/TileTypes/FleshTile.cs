@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class FleshTile : TerrainTile
 {
+	[SerializeField] int numberCoinsDropped;
 
 	private WeaponController weaponController;
 	private PlayerScanRaycast scanForPlayer;
+
+	private CoinSpawner coinSpawner;
+	private EntityTweenEffects entityTweenFX;
 
 	protected override void Awake()
 	{
 		base.Awake();
 		weaponController = GetComponent<WeaponController>();
+		coinSpawner = GetComponent<CoinSpawner>();
+		entityTweenFX = GetComponent<EntityTweenEffects>();
 		scanForPlayer = GetComponent<PlayerScanRaycast>();
 	}
 
@@ -38,23 +44,18 @@ public class FleshTile : TerrainTile
 
 	protected override void OnHit(GameObject gameObjectHitBy)
 	{
-		if (LayerMask.GetMask(LayerMask.LayerToName(gameObjectHitBy.layer)) == bombMask)
+
+		DamageComponent incomingDamageComponent = gameObjectHitBy.GetComponent<DamageComponent>();
+
+		if (incomingDamageComponent != null)
 		{
-			DestroyTile();
-		}
+			if (incomingDamageComponent.DamageAlignment != hitbox.ownerAlignment || incomingDamageComponent.HitsAllies)
+			{
+				// start flash tween
+				entityTweenFX.OnDamageTween();
 
-		if (gameObjectHitBy.layer == LayerMask.NameToLayer("Projectile"))
-		{
-			DamageComponent projectileDamage = gameObjectHitBy.GetComponent<DamageComponent>();
-
-			health.DealDamage(projectileDamage.DamageAmount);
-		}
-
-		if (gameObjectHitBy.layer == LayerMask.NameToLayer("Melee"))
-		{
-			DamageComponent meleeDamage = gameObjectHitBy.GetComponent<DamageComponent>();
-
-			health.DealDamage(meleeDamage.DamageAmount);
+				health.DealDamage(incomingDamageComponent.DamageAmount);
+			}
 		}
 	}
 }

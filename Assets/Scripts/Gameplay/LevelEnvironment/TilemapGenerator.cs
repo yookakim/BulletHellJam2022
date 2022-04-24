@@ -18,12 +18,21 @@ public class TilemapGenerator : MonoBehaviour
 	[SerializeField] private float potentialRoomLocationThreshold;
 	[SerializeField] private float fleshTileSpawnRange;
 	[SerializeField] private float dungeonSpawnFrequencyChunks;
-
+	[SerializeField] private float molechantSpawnFrequencyChunks;
+	[SerializeField] private float fleshRoomSpawnChance;
+	[SerializeField] private float startFleshRoomSpawningAtChunkNumber;
+	[Space]
+	[Header("Monster Spawns")]
 	[SerializeField] private float skellySpawnRate;
+	[SerializeField] private float skellySpawnRateChunkScalar;
+	[SerializeField] private float skellyMaxSpawnRate;
 	[SerializeField] private float caveBatSpawnRate;
+	[SerializeField] private float caveBatSpawnRateChunkScalar;
+	[SerializeField] private float caveBatMaxSpawnRate;
 	[SerializeField] private GameObject skellyPrefab;
 	[SerializeField] private GameObject caveBatPrefab;
-
+	[Space]
+	[Header("Tile Types")]
 	[SerializeField] private TileBase mapEdgeTile;
 	[SerializeField] private TileBase dirtTile;
 	[SerializeField] private TileBase dirtRoofTile;
@@ -32,20 +41,29 @@ public class TilemapGenerator : MonoBehaviour
 	[SerializeField] private TileBase fleshRoofTile;
 	[SerializeField] private TileBase potentialRoomLocationTile;
 	[SerializeField] private TileBase roomCenterConfirmedTile;
-
+	[Space]
+	[Header("Tilemap References")]
 	[SerializeField] private TilemapManager tilemapManager;
 	[SerializeField] private Tilemap terrainRoofTilemap;
 	[SerializeField] private Tilemap groundTilemap; // tilemap for the ground that player walks on
 	[SerializeField] private Tilemap terrainTilemap; // tilemap for actual walls/blocks that player interacts with
 
+	[SerializeField] private GameObject molechantAreaPrefab;
 	[SerializeField] private GameObject dungeonPrefab;
+	[SerializeField] private GameObject fleshRoomPrefab;
 	[SerializeField] private Tilemap roomTilemapPrefab;
 	[SerializeField] private Transform testPlayerTransform;
 
 	private float randomSeed;
 	private int nextChunkY;
+	private int currentChunkNumber;
 	private bool currentlyGeneratingChunk;
-	private float chunkCounterForDungeonSpawn;
+
+	private int chunkCounterForMolechantSpawn;
+	private int chunkCounterForDungeonSpawn;
+	private bool molechantSpawnedThisChunk;
+	private bool dungeonSpawnedThisChunk;
+
 	private Dictionary<Vector3Int, TileBase> generatedRooms;
 	private PotentialRoomLocationComparer potentialRoomLocationComparer;
 
@@ -56,6 +74,8 @@ public class TilemapGenerator : MonoBehaviour
 		randomSeed = Random.Range(0, 1000000);
 		// Debug.Log(randomSeed);
 		nextChunkY = 16;
+		currentChunkNumber = 0;
+		chunkCounterForMolechantSpawn = 0;
 		chunkCounterForDungeonSpawn = 0;
 		currentlyGeneratingChunk = false;
 		generatedRooms = new Dictionary<Vector3Int, TileBase>();
@@ -93,16 +113,6 @@ public class TilemapGenerator : MonoBehaviour
 		}
 	}
 
-	private void GenerateRandomArea()
-	{
-		for (int i = -tilemapWidth / 2; i < tilemapWidth / 2; i++)
-		{
-			for (int j = -chunkHeight / 2; j < chunkHeight / 2; j++)
-			{
-				groundTilemap.SetTile(new Vector3Int(i, j, 0), dirtTile);
-			}
-		}
-	}
 
 	/*
 	 * Generating chunks by distance from player:
@@ -115,7 +125,7 @@ public class TilemapGenerator : MonoBehaviour
 	private IEnumerator GenerateNextChunkAsync()
 	{
 		currentlyGeneratingChunk = true;
-
+		currentChunkNumber++;
 		int chunkLowerY = nextChunkY - (chunkHeight / 2);
 		int chunkUpperY = nextChunkY + (chunkHeight / 2);
 		for (int i = 0; i < chunkHeight; i++)
@@ -125,92 +135,37 @@ public class TilemapGenerator : MonoBehaviour
 		}
 		List<PotentialRoomLocation> potentialRoomLocations = new List<PotentialRoomLocation>();
 
-		if (chunkCounterForDungeonSpawn >= dungeonSpawnFrequencyChunks)
+		if (chunkCounterForMolechantSpawn >= molechantSpawnFrequencyChunks)
+		{
+			chunkCounterForMolechantSpawn = 0;
+			molechantSpawnedThisChunk = true;
+			StartCoroutine(GeneratePrefabRoom(molechantAreaPrefab));
+		}
+
+		if (chunkCounterForDungeonSpawn >= dungeonSpawnFrequencyChunks && !molechantSpawnedThisChunk)
 		{
 
 			chunkCounterForDungeonSpawn = 0;
+			dungeonSpawnedThisChunk = true;
+			StartCoroutine(GeneratePrefabRoom(dungeonPrefab));
+		}
 
-			TilemapPrefabContainer dungeonContainer = dungeonPrefab.GetComponent<TilemapPrefabContainer>();
-			// Debug.Log(dungeonContainer.GetGameObjectsList()[0].transform.position);
-			List<GameObject> objectsToInstantiate = dungeonContainer.GetGameObjectsList();
+		if (currentChunkNumber >= startFleshRoomSpawningAtChunkNumber && !dungeonSpawnedThisChunk && !molechantSpawnedThisChunk)
+		{
+			float spawnRoll = Random.Range(0f, 1f);
 
-			Tilemap dungeonWalls = dungeonContainer.GetTerrainTilemap();
-			Tilemap dungeonFloor = dungeonContainer.GetGroundTilemap();
-			Tilemap dungeonRoof = dungeonContainer.GetRoofTilemap();
-
-			BoundsInt prefabBounds = dungeonContainer.GetBoundsOfPrefabTilemap();
-
-			int spawnMinX = -tilemapWidth / 2 + prefabBounds.size.x / 2;
-			int spawnMaxX = (tilemapWidth / 2) - prefabBounds.size.x / 2;
-			int spawnMinY = -chunkHeight / 2 + prefabBounds.size.y / 2;
-			int spawnMaxY = (chunkHeight / 2) - prefabBounds.size.y / 2;
-
-			Vector3Int spawnPosition = new Vector3Int(Random.Range(spawnMinX, spawnMaxX), Random.Range(spawnMinY, spawnMaxY) + nextChunkY, 0);
-
-			foreach (GameObject gameObject in objectsToInstantiate)
+			if (spawnRoll <= fleshRoomSpawnChance)
 			{
-				Instantiate(gameObject, gameObject.transform.position + (spawnPosition - prefabBounds.center), gameObject.transform.rotation);
+				StartCoroutine(GeneratePrefabRoom(fleshRoomPrefab));
 			}
-
-			BoundsInt.PositionEnumerator positionsInPrefabBounds = prefabBounds.allPositionsWithin;
-
-			Debug.Log(prefabBounds);
-			Debug.Log(spawnPosition.y + ", " + nextChunkY);
-
-
-			foreach (Vector3Int position in positionsInPrefabBounds)
-			{
-				// GameObject wallToInstantiate = dungeonWalls.GetObjectToInstantiate(position);
-
-				TileBase tileToInstantiate = dungeonFloor.GetTile(position);
-
-				if (tileToInstantiate != null)
-				{
-					Vector3Int floorTilePosition = new Vector3Int(spawnPosition.x + position.x, spawnPosition.y + position.y, 0);
-
-					groundTilemap.SetTile(floorTilePosition, tileToInstantiate);
-				}
-			}
-
-			yield return null;
-
-			foreach (Vector3Int position in positionsInPrefabBounds)
-			{
-				// GameObject wallToInstantiate = dungeonWalls.GetObjectToInstantiate(position);
-
-				TileBase tileToInstantiate = dungeonWalls.GetTile(position);
-
-				if (tileToInstantiate != null)
-				{
-					Vector3Int wallTilePosition = new Vector3Int(spawnPosition.x + position.x, spawnPosition.y + position.y, 0);
-
-					terrainTilemap.SetTile(wallTilePosition, tileToInstantiate);
-				}
-			}
-
-			yield return null;
-
-			foreach (Vector3Int position in positionsInPrefabBounds)
-			{
-				// GameObject wallToInstantiate = dungeonWalls.GetObjectToInstantiate(position);
-
-				TileBase tileToInstantiate = dungeonRoof.GetTile(position);
-
-				if (tileToInstantiate != null)
-				{
-					Vector3Int roofTilePosition = new Vector3Int(spawnPosition.x + position.x, spawnPosition.y + position.y, 0);
-
-					terrainRoofTilemap.SetTile(roofTilePosition, tileToInstantiate);
-				}
-			}
-
-			yield return null;
 		}
 
 		for (int i = -tilemapWidth / 2; i < tilemapWidth / 2; i++)
 		{
 			for (int j = chunkLowerY; j < chunkUpperY; j++)
 			{
+				// if this tile position doesn't already contain ground from some previous spawn (dungeon, etc):
+
 				if (!groundTilemap.HasTile(new Vector3Int(i, j, 0))) 
 				{
 					groundTilemap.SetTile(new Vector3Int(i, j, 0), groundTile);
@@ -247,18 +202,24 @@ public class TilemapGenerator : MonoBehaviour
 						// bool willSpawnSkellyHere = false;
 						if (!terrainTilemap.HasTile(new Vector3Int(i, j - 1, 0)))
 						{
-
-
-							float skellyRandomPercent = Random.Range(0f, 1f);
-							float caveBatRandomPercent = Random.Range(0f, 1f);
-
-							if (skellyRandomPercent <= skellySpawnRate)
+							if (!molechantSpawnedThisChunk)
 							{
-								Instantiate(skellyPrefab, thisTilePosition, Quaternion.identity);
-							}
-							if (caveBatRandomPercent <= caveBatSpawnRate)
-							{
-								Instantiate(caveBatPrefab, thisTilePosition, Quaternion.identity);
+								float skellyRandomPercent = Random.Range(0f, 1f);
+								float caveBatRandomPercent = Random.Range(0f, 1f);
+
+								float scaledSkellySpawnChance = skellySpawnRate + skellySpawnRateChunkScalar * currentChunkNumber;
+								float skellySpawnThreshold = scaledSkellySpawnChance >= skellyMaxSpawnRate ? skellyMaxSpawnRate : scaledSkellySpawnChance;
+								float scaledCaveBatSpawnChance = caveBatSpawnRate + caveBatSpawnRateChunkScalar * currentChunkNumber;
+								float skellyCaveBatThreshold = scaledCaveBatSpawnChance >= caveBatMaxSpawnRate ? caveBatMaxSpawnRate : scaledCaveBatSpawnChance;
+
+								if (skellyRandomPercent <= skellySpawnThreshold)
+								{
+									Instantiate(skellyPrefab, thisTilePosition, Quaternion.identity);
+								}
+								if (caveBatRandomPercent <= skellyCaveBatThreshold)
+								{
+									Instantiate(caveBatPrefab, thisTilePosition, Quaternion.identity);
+								}
 							}
 						}
 						else
@@ -292,8 +253,95 @@ public class TilemapGenerator : MonoBehaviour
 
 		nextChunkY += chunkHeight;
 		currentlyGeneratingChunk = false;
+		dungeonSpawnedThisChunk = false;
+		molechantSpawnedThisChunk = false;
 		chunkCounterForDungeonSpawn++;
+		chunkCounterForMolechantSpawn++;
 		// noiseShiftX += 1 / (float)tilemapWidth;
+	}
+
+	private IEnumerator GeneratePrefabRoom(GameObject roomPrefab)
+	{
+		TilemapPrefabContainer roomContainer = roomPrefab.GetComponent<TilemapPrefabContainer>();
+		// Debug.Log(dungeonContainer.GetGameObjectsList()[0].transform.position);
+		List<GameObject> objectsToInstantiate = roomContainer.GetGameObjectsList();
+
+		Tilemap prefabWalls = roomContainer.GetTerrainTilemap();
+		Tilemap prefabFloor = roomContainer.GetGroundTilemap();
+		Tilemap prefabRoof = roomContainer.GetRoofTilemap();
+
+		BoundsInt prefabBounds = roomContainer.GetBoundsOfPrefabTilemap();
+
+		int spawnMinX = -tilemapWidth / 2 + prefabBounds.size.x / 2;
+		int spawnMaxX = (tilemapWidth / 2) - prefabBounds.size.x / 2;
+		int spawnMinY = -chunkHeight / 2 + prefabBounds.size.y / 2;
+		int spawnMaxY = (chunkHeight / 2) - prefabBounds.size.y / 2;
+
+		Vector3Int spawnPosition = new Vector3Int(Random.Range(spawnMinX, spawnMaxX), Random.Range(spawnMinY, spawnMaxY) + nextChunkY, 0);
+
+		if (objectsToInstantiate != null)
+		{
+			foreach (GameObject gameObject in objectsToInstantiate)
+			{
+				Instantiate(gameObject, gameObject.transform.position + (spawnPosition - prefabBounds.center), gameObject.transform.rotation);
+			}
+		}
+
+
+
+		BoundsInt.PositionEnumerator positionsInPrefabBounds = prefabBounds.allPositionsWithin;
+
+		Debug.Log(prefabBounds);
+		Debug.Log(spawnPosition.y + ", " + nextChunkY);
+
+
+		foreach (Vector3Int position in positionsInPrefabBounds)
+		{
+			// GameObject wallToInstantiate = dungeonWalls.GetObjectToInstantiate(position);
+
+			TileBase tileToInstantiate = prefabFloor.GetTile(position);
+
+			if (tileToInstantiate != null)
+			{
+				Vector3Int floorTilePosition = new Vector3Int(spawnPosition.x + position.x, spawnPosition.y + position.y, 0);
+
+				groundTilemap.SetTile(floorTilePosition, tileToInstantiate);
+			}
+		}
+
+		yield return null;
+
+		foreach (Vector3Int position in positionsInPrefabBounds)
+		{
+			// GameObject wallToInstantiate = dungeonWalls.GetObjectToInstantiate(position);
+
+			TileBase tileToInstantiate = prefabWalls.GetTile(position);
+
+			if (tileToInstantiate != null)
+			{
+				Vector3Int wallTilePosition = new Vector3Int(spawnPosition.x + position.x, spawnPosition.y + position.y, 0);
+
+				terrainTilemap.SetTile(wallTilePosition, tileToInstantiate);
+			}
+		}
+
+		yield return null;
+
+		foreach (Vector3Int position in positionsInPrefabBounds)
+		{
+			// GameObject wallToInstantiate = dungeonWalls.GetObjectToInstantiate(position);
+
+			TileBase tileToInstantiate = prefabRoof.GetTile(position);
+
+			if (tileToInstantiate != null)
+			{
+				Vector3Int roofTilePosition = new Vector3Int(spawnPosition.x + position.x, spawnPosition.y + position.y, 0);
+
+				terrainRoofTilemap.SetTile(roofTilePosition, tileToInstantiate);
+			}
+		}
+
+		yield return null;
 	}
 
 	/// <summary>

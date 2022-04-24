@@ -485,12 +485,19 @@ MonoBehaviour:
   noiseYScale: 2
   offsetMultiplier: 0.010101011
   minimumDistanceBetweenRooms: 12
-  addTileNoiseOutputThreshold: 0.4
-  potentialRoomLocationThreshold: 0.65
+  addTileNoiseOutputThreshold: 0.45
+  potentialRoomLocationThreshold: 0.7
   fleshTileSpawnRange: 0
-  dungeonSpawnFrequencyChunks: 1
-  skellySpawnRate: 0.024
-  caveBatSpawnRate: 0.01
+  dungeonSpawnFrequencyChunks: 7
+  molechantSpawnFrequencyChunks: 10
+  fleshRoomSpawnChance: 0.2
+  startFleshRoomSpawningAtChunkNumber: 6
+  skellySpawnRate: 0.015
+  skellySpawnRateChunkScalar: 0.001
+  skellyMaxSpawnRate: 0.05
+  caveBatSpawnRate: 0.008
+  caveBatSpawnRateChunkScalar: 0.001
+  caveBatMaxSpawnRate: 0.05
   skellyPrefab: {fileID: 6803426168261079972, guid: 4598aadbc1525524597dfa8882c747a9, type: 3}
   caveBatPrefab: {fileID: 6803426168261079972, guid: 1f00e9d2031e99548a57cd0e56d0b534, type: 3}
   mapEdgeTile: {fileID: 11400000, guid: 813873c41fdc51340ac90ac3b6fbc4f0, type: 2}
@@ -505,7 +512,9 @@ MonoBehaviour:
   terrainRoofTilemap: {fileID: 791126957214950180}
   groundTilemap: {fileID: 791126958667581312}
   terrainTilemap: {fileID: 791126957900145885}
+  molechantAreaPrefab: {fileID: 3206822553413925708, guid: c313849636fb92d46a35a75cab198fac, type: 3}
   dungeonPrefab: {fileID: 2940909478714555558, guid: 646ef74300867e841ad3a6f934c5af05, type: 3}
+  fleshRoomPrefab: {fileID: 8280747935157338327, guid: e1ae913514f313f43856d6428fa6a10e, type: 3}
   roomTilemapPrefab: {fileID: 5163201842031558623, guid: 4ba014ffb4553774abdf0fccb263d590, type: 3}
   testPlayerTransform: {fileID: 0}
 --- !u!114 &791126958350390445

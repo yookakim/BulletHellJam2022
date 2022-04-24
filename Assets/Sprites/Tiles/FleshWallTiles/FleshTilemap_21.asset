@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecb1db7012407fa498703c098010b760, type: 3}
-  m_Name: FleshTile
+  m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: FleshTilemap_21
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -289929395, guid: 3e8dfc76acd459644aa3001231b08678, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -31,6 +31,6 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 5157952307921053476, guid: 65cbd6a088dc49349a381394c5481a64, type: 3}
+  m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
-  m_ColliderType: 0
+  m_ColliderType: 1

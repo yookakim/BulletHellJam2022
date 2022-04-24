@@ -22,5 +22,5 @@ MonoBehaviour:
   bombExplosionStrength: 1
   friendlyDamageMultiplier: 0.25
   bombEntityDamage: 20
-  bombTickDownTime: 2
+  bombTickDownTime: 3
   timeToDestroyAfterExplosion: 1

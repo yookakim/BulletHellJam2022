@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class ShopInteractable : Interactable
 {
+	public ShopItemData ShopItemData { get => shopItemData; set => shopItemData = value; }
 	[SerializeField] private ShopItemData shopItemData;
 
 	protected override void Awake()
 	{
 		base.Awake();
-
+/*
 		interactableSprite.sprite = shopItemData.itemIcon;
 		tooltipHeader = shopItemData.itemName;
-		tooltipContent = shopItemData.itemDescription + " Price: " + shopItemData.itemPrice;
+		tooltipContent = shopItemData.itemDescription + " Price: " + shopItemData.itemPrice;*/
+	}
+
+	public void InitializeItemData(ShopItemData thisShopItem)
+	{
+		InteractableSprite.sprite = thisShopItem.itemIcon;
+		TooltipHeader = thisShopItem.itemName;
+		TooltipContent = thisShopItem.itemDescription + " Price: " + thisShopItem.itemPrice;
+		ShopItemData = thisShopItem;
 	}
 
 	public override void OnInteract(Player player)

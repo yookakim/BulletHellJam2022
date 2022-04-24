@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a88902b5ca3fa5a40bf21b525042b771, type: 3}
+  m_Name: Prototype1
+  m_EditorClassIdentifier: 
+  itemPrice: 0
+  itemName: qwesrqwerq
+  itemDescription: zxcvzmvmnmb
+  itemIcon: {fileID: 21300000, guid: 6df8c4ae88b61904086338b7f4d43154, type: 3}
+  shopInteractablePrefab: {fileID: 6462261664468512210, guid: 1e26b34bac27f5f428519c41ebe82aae, type: 3}
+  weaponData: {fileID: 11400000, guid: eb9354a5e50f09f4f95e89a02a72a15d, type: 2}

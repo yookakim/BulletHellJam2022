@@ -5,8 +5,9 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
 	public Transform TooltipAnchorPosition { get => tooltipAnchorPosition; }
-	public string TooltipContent { get => tooltipContent; }
-	public string TooltipHeader { get => tooltipHeader; }
+	public string TooltipContent { get => tooltipContent; set => tooltipContent = value; }
+	public string TooltipHeader { get => tooltipHeader; set => tooltipHeader = value; }
+	public SpriteRenderer InteractableSprite { get => interactableSprite; set => interactableSprite = value; }
 
 	[SerializeField] private Transform tooltipAnchorPosition;
 

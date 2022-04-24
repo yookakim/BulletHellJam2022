@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: FleshShooterData
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 6435513250006416299, guid: c5f15c23fb3997647b25e40a3519b9c4, type: 3}
-  useRate: 0.75
-  launchForce: 9
+  useRate: 0.7
+  allowsHoldFire: 0
+  launchForce: 3
   clusterAccuracyDeviation: 0
   individualAccuracyDeviation: 0
   directionFacesTarget: 1
   clusterAmount: 3
-  clusterSpreadAngleInDegrees: 35
+  clusterSpreadAngleInDegrees: 50
+  spawnDistanceFromWeapon: 0

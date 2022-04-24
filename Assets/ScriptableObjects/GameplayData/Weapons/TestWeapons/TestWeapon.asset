@@ -16,7 +16,7 @@ MonoBehaviour:
   useRate: 7
   allowsHoldFire: 1
   launchForce: 25
-  clusterAccuracyDeviation: 40
+  clusterAccuracyDeviation: 22
   individualAccuracyDeviation: 0
   directionFacesTarget: 0
   clusterAmount: 1

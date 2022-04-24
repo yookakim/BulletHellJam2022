@@ -263,7 +263,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486c32b65c03efa4cae7842ed0ab5ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: 304e29e9434b36146a1eef948c545750, type: 2}
+  startingWeaponData: {fileID: 11400000, guid: 304e29e9434b36146a1eef948c545750, type: 2}
+  weaponOwner: {fileID: 5157952307921053476}
 --- !u!95 &2192893711186481979
 Animator:
   serializedVersion: 4
@@ -440,4 +441,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroysProjectiles: 1
-  ownerAlignment: 2
+  ownerAlignment: 1

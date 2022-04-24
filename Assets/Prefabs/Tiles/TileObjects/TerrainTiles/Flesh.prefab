@@ -100,6 +100,8 @@ GameObject:
   - component: {fileID: 1069886934636684132}
   - component: {fileID: 2300441753230808996}
   - component: {fileID: 2192893711186481979}
+  - component: {fileID: 2266005653159813277}
+  - component: {fileID: 7951737616237682188}
   m_Layer: 6
   m_Name: Flesh
   m_TagString: Untagged
@@ -224,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b987dc5f1701c449f03d6fc212c5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
+  maxHealth: 40
 --- !u!61 &1069886934636684132
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -263,7 +265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486c32b65c03efa4cae7842ed0ab5ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: 304e29e9434b36146a1eef948c545750, type: 2}
+  startingWeaponData: {fileID: 11400000, guid: 304e29e9434b36146a1eef948c545750, type: 2}
+  weaponOwner: {fileID: 5157952307921053476}
 --- !u!95 &2192893711186481979
 Animator:
   serializedVersion: 4
@@ -284,6 +287,34 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2266005653159813277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157952307921053476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5cbd6ab8d99d424f8ab330a131dc5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectData: {fileID: 11400000, guid: 61406ca86870b2441884a03ece81efda, type: 2}
+  sprite: {fileID: 5157952307921053477}
+  entityOverlayMaterial: {fileID: 2100000, guid: a4976f5b6d703d94e908c47af7c93088, type: 2}
+--- !u!114 &7951737616237682188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157952307921053476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e00ac5a87bfa66240bec06179f7ea5e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinToSpawn: {fileID: 6577949691152341398, guid: b93f91fe7913f9b4a967def700b5a821, type: 3}
 --- !u!1 &5198909995681535320
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,4 +471,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroysProjectiles: 1
-  ownerAlignment: 2
+  ownerAlignment: 1
