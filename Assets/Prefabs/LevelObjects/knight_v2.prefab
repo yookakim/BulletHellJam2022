@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486c32b65c03efa4cae7842ed0ab5ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: 3a416c9f80c9f0b4a989b176f721cff8, type: 2}
+  startingWeaponData: {fileID: 11400000, guid: 3a416c9f80c9f0b4a989b176f721cff8, type: 2}
   weaponOwner: {fileID: 8589835605523327350}
 --- !u!1 &6009796609490791992
 GameObject:
@@ -414,6 +414,8 @@ MonoBehaviour:
   playerTransformReference: {fileID: 11400000, guid: f11283cdff44a724ab52be0d8f04fb5b, type: 2}
   playerHealthEvent: {fileID: 11400000, guid: fe9a7447e3d5b5749998e0361f07a2dd, type: 2}
   coinAmountChangedEvent: {fileID: 11400000, guid: 41481adb23d7f2a4d9540ff1bfb9b542, type: 2}
+  interactableEnteredEvent: {fileID: 11400000, guid: 49c7ba96fb8e15e4db5b5192335dba3e, type: 2}
+  interactableExitedEvent: {fileID: 11400000, guid: cbd270be1665d8d458da54a9493c4327, type: 2}
 --- !u!114 &8589835605523327347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,7 +455,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   launchStrength: 20
-  bombPrefab: {fileID: 823305739645613985, guid: cff37d7fdaf7392408dbdb9ba14e08dd, type: 3}
+  bombData: {fileID: 11400000, guid: 5e3f435c89701d4488669aeb8bc90ae8, type: 2}
+  initialMaxBombCharges: 3
+  initialChargeRate: 1
+  bombLauncherLoadedEvent: {fileID: 11400000, guid: 8df17d7ea211bf441a17779fc48494e8, type: 2}
 --- !u!61 &8589835605523327356
 BoxCollider2D:
   m_ObjectHideFlags: 0

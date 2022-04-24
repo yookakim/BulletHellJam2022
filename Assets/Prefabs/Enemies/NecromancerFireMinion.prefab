@@ -180,7 +180,11 @@ MonoBehaviour:
   entityTweenFX: {fileID: 6244720269227915735}
   entityStatusEffects: {fileID: 2123895982578609355}
   rb: {fileID: 4704752586227310896}
+  coinSpawner: {fileID: 0}
+  coinsDropped: 0
+  timeAfterDeathBeforeDestroy: 0
   entityMass: 1
+  knockbackForceOnDeath: 0
   speedDecelerationLerpAmount: 0.04
   speedDecelerationLerpRandomRange: 0.05
   initialSpeedMultiplier: 1.3
@@ -306,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486c32b65c03efa4cae7842ed0ab5ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: 80dba3da6d76b2044bd545f19879ff51, type: 2}
+  startingWeaponData: {fileID: 11400000, guid: 80dba3da6d76b2044bd545f19879ff51, type: 2}
   weaponOwner: {fileID: 6803426168261079972}
 --- !u!114 &9058749343538684005
 MonoBehaviour:

@@ -36,14 +36,6 @@ public class GameUI : MonoBehaviour
 
 	public void RefreshCoinAmount(int newAmount)
 	{
-		Debug.Log("laser focused");
-
-
 		coinAmountText.text = ("x" + newAmount).ToString();
-		coinAmountText.ClearMesh();
-		coinAmountText.SetAllDirty();
-		coinAmountText.ForceMeshUpdate(true, true);
-
-		testbuttontext.text = "lol wtf";
 	}
 }

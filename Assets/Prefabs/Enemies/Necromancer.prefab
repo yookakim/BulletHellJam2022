@@ -44,53 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486c32b65c03efa4cae7842ed0ab5ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: 66aa4f42f2e3ffb4aa5c244824f71b96, type: 2}
-  weaponOwner: {fileID: 6803426168261079972}
---- !u!1 &2879601013475345113
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8509241104609316709}
-  - component: {fileID: 1909985464409666981}
-  m_Layer: 11
-  m_Name: NecromancerAttack2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8509241104609316709
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2879601013475345113}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6803426168261079970}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1909985464409666981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2879601013475345113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 486c32b65c03efa4cae7842ed0ab5ff5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: c882dddb4354d7d44b5bf6445d4b9eb5, type: 2}
+  startingWeaponData: {fileID: 11400000, guid: 66aa4f42f2e3ffb4aa5c244824f71b96, type: 2}
   weaponOwner: {fileID: 6803426168261079972}
 --- !u!1 &6786019780938596152
 GameObject:
@@ -178,6 +132,7 @@ GameObject:
   - component: {fileID: 9058749343538684005}
   - component: {fileID: 3658705895959949767}
   - component: {fileID: 8660078153371075635}
+  - component: {fileID: 7473301440086845379}
   m_Layer: 11
   m_Name: Necromancer
   m_TagString: Untagged
@@ -199,8 +154,6 @@ Transform:
   m_Children:
   - {fileID: 6313503743433307870}
   - {fileID: 656242593915816558}
-  - {fileID: 8509241104609316709}
-  - {fileID: 3623780902377713548}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -344,8 +297,8 @@ MonoBehaviour:
   entityTweenFX: {fileID: 8660078153371075635}
   entityStatusEffects: {fileID: 2123895982578609355}
   rb: {fileID: 4704752586227310896}
-  coinSpawner: {fileID: 0}
-  coinsDropped: 0
+  coinSpawner: {fileID: 7473301440086845379}
+  coinsDropped: 120
   timeAfterDeathBeforeDestroy: 1.2
   entityMass: 5
   knockbackForceOnDeath: 0
@@ -353,8 +306,6 @@ MonoBehaviour:
   playerScanRaycast: {fileID: 4133744691020497599}
   necromancerAttacks:
   - {fileID: 5907875416897876250}
-  - {fileID: 1909985464409666981}
-  - {fileID: 4111983881698086335}
   idleToOneTransitionTime: 2
   phaseOneTimeLength: 7
   oneToTwoTransitionTime: 3
@@ -377,7 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b987dc5f1701c449f03d6fc212c5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 50
 --- !u!114 &5246072126135989320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,7 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486c32b65c03efa4cae7842ed0ab5ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: 66aa4f42f2e3ffb4aa5c244824f71b96, type: 2}
+  startingWeaponData: {fileID: 11400000, guid: c63ab2847c35e324aadb3085967a9f4b, type: 2}
   weaponOwner: {fileID: 6803426168261079972}
 --- !u!114 &873311347496822178
 MonoBehaviour:
@@ -495,49 +446,16 @@ MonoBehaviour:
   effectData: {fileID: 11400000, guid: 61406ca86870b2441884a03ece81efda, type: 2}
   sprite: {fileID: 6803426168261079971}
   entityOverlayMaterial: {fileID: 2100000, guid: a4976f5b6d703d94e908c47af7c93088, type: 2}
---- !u!1 &8117833682845174079
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3623780902377713548}
-  - component: {fileID: 4111983881698086335}
-  m_Layer: 11
-  m_Name: NecromancerAttack3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3623780902377713548
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8117833682845174079}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6803426168261079970}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4111983881698086335
+--- !u!114 &7473301440086845379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8117833682845174079}
+  m_GameObject: {fileID: 6803426168261079972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 486c32b65c03efa4cae7842ed0ab5ff5, type: 3}
+  m_Script: {fileID: 11500000, guid: e00ac5a87bfa66240bec06179f7ea5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: c882dddb4354d7d44b5bf6445d4b9eb5, type: 2}
-  weaponOwner: {fileID: 6803426168261079972}
+  coinToSpawn: {fileID: 6577949691152341398, guid: b93f91fe7913f9b4a967def700b5a821, type: 3}

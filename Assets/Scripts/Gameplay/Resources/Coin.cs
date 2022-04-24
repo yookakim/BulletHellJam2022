@@ -67,9 +67,24 @@ public class Coin : MonoBehaviour
 		}
 	}
 
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		Hitbox hitbox = collision.gameObject.GetComponent<Hitbox>();
+
+		Debug.Log("collision detected in coin");
+
+		if (hitbox != null)
+		{
+
+			hitbox.TriggerHitbox(gameObject);
+		}
+	}
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		Hitbox hitbox = collision.gameObject.GetComponent<Hitbox>();
+
+		Debug.Log("trigger detected in coin");
 
 		if (hitbox != null)
 		{

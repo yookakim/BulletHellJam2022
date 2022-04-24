@@ -5,12 +5,14 @@ using UnityEngine;
 [CreateAssetMenu]
 public class BombData : ScriptableObject
 {
+    public GameObject bombPrefab;
     [Header("Damage Component")]
     public DamageComponent.Alignment damageAlignment;
     public bool hitsAllies;
     public int damageAmount;
     public float knockbackAmount;
-
+    [Space]
+    public float bombChargeTime;
     public float bombExplosionRadius;
     public float bombExplosionStrength;
     public float friendlyDamageMultiplier;

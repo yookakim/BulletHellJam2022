@@ -10,8 +10,10 @@ public class WeaponController : MonoBehaviour
 	public Transform LiveWeaponTargetTransform { get; set; }
 	public bool CanUse { get; private set; }
 	public GameObject WeaponOwner { get => weaponOwner; }
+	public WeaponData CurrentWeapon { get; private set; }
+	public bool useInputHeld { get; set; }
 
-    [SerializeField] private WeaponData weaponData;
+    [SerializeField] private WeaponData startingWeaponData;
 	[SerializeField] private GameObject weaponOwner;
 
     private float timeLastUsed;
@@ -19,19 +21,30 @@ public class WeaponController : MonoBehaviour
 	private void Awake()
 	{
 		timeLastUsed = Time.time;
+		CurrentWeapon = startingWeaponData;
 	}
 
 	private void Update()
 	{
-		if (Time.time - timeLastUsed >= 1 / weaponData.useRate)
+		if (Time.time - timeLastUsed >= 1 / CurrentWeapon.useRate)
 		{
 			CanUse = true;
 		}
+
+		if (CurrentWeapon.allowsHoldFire && useInputHeld)
+		{
+			AttemptUse();
+		}
+	}
+
+	public void SwapWeapon(WeaponData newWeapon)
+	{
+		CurrentWeapon = newWeapon;
 	}
 
 	public void AttemptUse()
 	{
-		if (Time.time - timeLastUsed >= 1 / weaponData.useRate)
+		if (Time.time - timeLastUsed >= 1 / CurrentWeapon.useRate)
 		{
 			Use();
 			timeLastUsed = Time.time;
@@ -42,7 +55,7 @@ public class WeaponController : MonoBehaviour
 	{
 		CanUse = false;
 		CustomEvent.Trigger(gameObject, "WeaponUsed");
-		weaponData.UseWeapon(this);
+		CurrentWeapon.UseWeapon(this);
 	}
 
 	public void CancelTweens()

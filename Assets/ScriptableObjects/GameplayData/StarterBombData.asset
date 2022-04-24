@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055073ef9a003044e8161ca5a345ed8b, type: 3}
   m_Name: StarterBombData
   m_EditorClassIdentifier: 
+  bombPrefab: {fileID: 823305739645613985, guid: cff37d7fdaf7392408dbdb9ba14e08dd, type: 3}
   damageAlignment: 0
   hitsAllies: 1
-  damageAmount: 12
+  damageAmount: 20
   knockbackAmount: 0
+  bombChargeTime: 4
   bombExplosionRadius: 3
   bombExplosionStrength: 1
-  friendlyDamageMultiplier: 0.5
+  friendlyDamageMultiplier: 0.25
   bombEntityDamage: 20
   bombTickDownTime: 2
   timeToDestroyAfterExplosion: 1

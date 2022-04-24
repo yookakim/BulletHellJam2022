@@ -9,14 +9,33 @@ public class Player : MonoBehaviour
 		get => currentCoinAmount;
 		set 
 		{
-			currentCoinAmount = value;
-			coinAmountChangedEvent.Raise(value);
+			if (value <= 0)
+			{
+				currentCoinAmount = 0;
+			}
+			else
+			{
+				currentCoinAmount = value;
+			}
+			coinAmountChangedEvent.Raise(currentCoinAmount);
 		} 
+	}
+
+	public Interactable CurrentlyInteractedWith
+	{
+		get => currentlyInteractedWith;
+		set
+		{
+			currentlyInteractedWith = value;
+			interactableEnteredEvent.Raise(currentlyInteractedWith.gameObject);
+		}
 	}
 
 	[SerializeField] private TransformReference playerTransformReference;
 	[SerializeField] private HealthEvent playerHealthEvent;
 	[SerializeField] private IntEvent coinAmountChangedEvent;
+	[SerializeField] private GameObjectEvent interactableEnteredEvent;
+	[SerializeField] private GameEvent interactableExitedEvent;
 
 	private PlayerInputController inputController;
 	private Movement movement;
@@ -28,6 +47,8 @@ public class Player : MonoBehaviour
 	private Hitbox hitbox;
 
 	private int currentCoinAmount;
+
+	private Interactable currentlyInteractedWith;
 
 	private void Awake()
 	{
@@ -66,6 +87,15 @@ public class Player : MonoBehaviour
 			weaponController.AttemptUse();
 		}
 
+		if (inputController.CursorInputHeld)
+		{
+			weaponController.useInputHeld = true;
+		}
+		else
+		{
+			weaponController.useInputHeld = false;
+		}
+
 		if (inputController.MeleeInputPressed)
 		{
 			// for detecting single click actions like double click abilities
@@ -74,6 +104,14 @@ public class Player : MonoBehaviour
 		if (inputController.MeleeInputHeld)
 		{
 			meleeController.AttemptUse();
+		}
+
+		if (inputController.InteractInputPressed)
+		{
+			if (currentlyInteractedWith != null)
+			{
+				currentlyInteractedWith.OnInteract(this);
+			}
 		}
 	}
 
@@ -89,6 +127,26 @@ public class Player : MonoBehaviour
 		hitbox.hitboxTriggeredEvent -= OnHitboxTrigger;
 		health.HealthZeroEvent -= OnHealthZero;
 		health.HealthChangedEvent -= OnHealthChanged;
+	}
+
+	public void OnInteractableTriggerExit(Interactable interactable)
+	{
+		// if the interactable we exited isn't the one we are currently interacted with, don't cancel
+		if (ReferenceEquals(interactable, currentlyInteractedWith))
+		{
+			interactableExitedEvent.Raise();
+			currentlyInteractedWith = null;
+		}
+	}
+
+	public void OnShopItemPurchased(ShopItemData shopItem)
+	{
+		WeaponShopItemData weaponItem = shopItem as WeaponShopItemData;
+
+		if (weaponItem != null)
+		{
+			weaponController.SwapWeapon(weaponItem.weaponData);
+		}
 	}
 
 	private void OnHealthZero(GameObject deadPlayerObject)
@@ -135,6 +193,13 @@ public class Player : MonoBehaviour
 		{
 			CurrentCoinAmount++;
 			coin.OnPickup();
+		}
+
+		Interactable interactable = objectHitBy.GetComponent<Interactable>();
+
+		if (interactable != null)
+		{
+			CurrentlyInteractedWith = interactable;
 		}
 	}
 }

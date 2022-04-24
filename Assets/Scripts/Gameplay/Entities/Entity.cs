@@ -78,7 +78,7 @@ public class Entity : MonoBehaviour
 		rb.AddForce(directionOfAttackHitBy * knockbackForceOnDeath, ForceMode2D.Impulse);
 		sprite.color = entityDeadColor;
 		hitbox.gameObject.SetActive(false);
-		GetComponent<Collider2D>().enabled = false;
+		// GetComponent<Collider2D>().enabled = false;
 	}
 
 	public virtual void FinalDestroy()

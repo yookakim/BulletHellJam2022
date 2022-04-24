@@ -100,8 +100,9 @@ public class TilemapManager : MonoBehaviour
 
 			if (raycastCheck.collider == null)
 			{
-				positionToReturn = position + (randomDirection * distance);
+				positionToReturn = position + (incrementedSearchDirection * distance);
 				// Debug.Log(randomDirection);
+				Debug.DrawLine(position, positionToReturn, Color.red);
 				randomPositionFound = true;
 			}
 			else

@@ -76,6 +76,15 @@ public class Necromancer : Entity
 		base.OnEntityHealthZero(deadObject);
 	}
 
+	public override void FinalDestroy()
+	{
+		for (int i = 0; i < coinsDropped; i++)
+		{
+			coinSpawner.SpawnCoin();
+		}
+		base.FinalDestroy();
+	}
+
 	public void PhaseOne()
 	{
 		necromancerAttacks[0].AttemptUse();
