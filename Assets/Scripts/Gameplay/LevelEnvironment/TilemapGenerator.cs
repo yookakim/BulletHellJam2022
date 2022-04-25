@@ -10,6 +10,7 @@ public class TilemapGenerator : MonoBehaviour
 	[SerializeField] private int tilemapWidth;
 	[SerializeField] private int chunkHeight;
 
+	[SerializeField] private int finalGoalChunk;
 	[SerializeField] private float noiseXScale;
 	[SerializeField] private float noiseYScale;
 	[SerializeField] private float offsetMultiplier;
@@ -48,9 +49,12 @@ public class TilemapGenerator : MonoBehaviour
 	[SerializeField] private Tilemap groundTilemap; // tilemap for the ground that player walks on
 	[SerializeField] private Tilemap terrainTilemap; // tilemap for actual walls/blocks that player interacts with
 
+	[SerializeField] private GameObject startingAreaPrefab;
 	[SerializeField] private GameObject molechantAreaPrefab;
 	[SerializeField] private GameObject dungeonPrefab;
 	[SerializeField] private GameObject fleshRoomPrefab;
+	[SerializeField] private GameObject finalGoalChunkPrefab;
+	[SerializeField] private GameObject fullDirtChunkPrefab;
 	[SerializeField] private Tilemap roomTilemapPrefab;
 	[SerializeField] private Transform testPlayerTransform;
 
@@ -73,16 +77,13 @@ public class TilemapGenerator : MonoBehaviour
 
 		randomSeed = Random.Range(0, 1000000);
 		// Debug.Log(randomSeed);
-		nextChunkY = 16;
+		nextChunkY = 0;
 		currentChunkNumber = 0;
 		chunkCounterForMolechantSpawn = 0;
 		chunkCounterForDungeonSpawn = 0;
 		currentlyGeneratingChunk = false;
 		generatedRooms = new Dictionary<Vector3Int, TileBase>();
 		potentialRoomLocationComparer = new PotentialRoomLocationComparer();
-		// GenerateRandomArea();
-		// GenerateRandomAreaUsingNoise();
-		GenerateStartingArea();
 	}
 
 	private void Update()
@@ -102,17 +103,6 @@ public class TilemapGenerator : MonoBehaviour
 		}
 	}
 
-	private void GenerateStartingArea()
-	{
-		for (int i = -tilemapWidth / 2; i < tilemapWidth / 2; i++)
-		{
-			for (int j = -chunkHeight / 2; j < chunkHeight; j++)
-			{
-				groundTilemap.SetTile(new Vector3Int(i, j, 0), groundTile);
-			}
-		}
-	}
-
 
 	/*
 	 * Generating chunks by distance from player:
@@ -125,9 +115,29 @@ public class TilemapGenerator : MonoBehaviour
 	private IEnumerator GenerateNextChunkAsync()
 	{
 		currentlyGeneratingChunk = true;
-		currentChunkNumber++;
+		
 		int chunkLowerY = nextChunkY - (chunkHeight / 2);
 		int chunkUpperY = nextChunkY + (chunkHeight / 2);
+
+		if (currentChunkNumber == 0)
+		{
+			StartCoroutine(GeneratePrefabRoom(startingAreaPrefab));
+		}
+
+		if (currentChunkNumber > finalGoalChunk)
+		{
+			StartCoroutine(GeneratePrefabRoom(fullDirtChunkPrefab));
+
+			// yield break;
+		}
+
+		if (currentChunkNumber == finalGoalChunk)
+		{
+			StartCoroutine(GeneratePrefabRoom(finalGoalChunkPrefab));
+
+			// yield break;
+		}
+
 		for (int i = 0; i < chunkHeight; i++)
 		{
 			terrainTilemap.SetTile(new Vector3Int(-tilemapWidth / 2 - 1, chunkLowerY + i, 0), mapEdgeTile);
@@ -135,14 +145,14 @@ public class TilemapGenerator : MonoBehaviour
 		}
 		List<PotentialRoomLocation> potentialRoomLocations = new List<PotentialRoomLocation>();
 
-		if (chunkCounterForMolechantSpawn >= molechantSpawnFrequencyChunks)
+		if (chunkCounterForMolechantSpawn >= molechantSpawnFrequencyChunks && !(currentChunkNumber >= finalGoalChunk))
 		{
 			chunkCounterForMolechantSpawn = 0;
 			molechantSpawnedThisChunk = true;
 			StartCoroutine(GeneratePrefabRoom(molechantAreaPrefab));
 		}
 
-		if (chunkCounterForDungeonSpawn >= dungeonSpawnFrequencyChunks && !molechantSpawnedThisChunk)
+		if (chunkCounterForDungeonSpawn >= dungeonSpawnFrequencyChunks && !molechantSpawnedThisChunk && !(currentChunkNumber >= finalGoalChunk))
 		{
 
 			chunkCounterForDungeonSpawn = 0;
@@ -150,7 +160,7 @@ public class TilemapGenerator : MonoBehaviour
 			StartCoroutine(GeneratePrefabRoom(dungeonPrefab));
 		}
 
-		if (currentChunkNumber >= startFleshRoomSpawningAtChunkNumber && !dungeonSpawnedThisChunk && !molechantSpawnedThisChunk)
+		if (currentChunkNumber >= startFleshRoomSpawningAtChunkNumber && !dungeonSpawnedThisChunk && !molechantSpawnedThisChunk && !(currentChunkNumber >= finalGoalChunk))
 		{
 			float spawnRoll = Random.Range(0f, 1f);
 
@@ -251,6 +261,7 @@ public class TilemapGenerator : MonoBehaviour
 
 		// TrySpawnRoom(potentialRoomLocations);
 
+		currentChunkNumber++;
 		nextChunkY += chunkHeight;
 		currentlyGeneratingChunk = false;
 		dungeonSpawnedThisChunk = false;
@@ -342,127 +353,6 @@ public class TilemapGenerator : MonoBehaviour
 		}
 
 		yield return null;
-	}
-
-	/// <summary>
-	/// Generate the next map chunk at the next map chunk Y location
-	/// </summary>
-	private void GenerateNextChunk()
-	{
-		int chunkLowerY = nextChunkY - (chunkHeight / 2);
-		int chunkUpperY = nextChunkY + (chunkHeight / 2);
-		for (int i = 0; i < chunkHeight; i++)
-		{
-			terrainTilemap.SetTile(new Vector3Int(-tilemapWidth / 2 - 1, chunkLowerY + i, 0), mapEdgeTile);
-			terrainTilemap.SetTile(new Vector3Int(tilemapWidth / 2, chunkLowerY + i, 0), mapEdgeTile);
-		}
-		List<PotentialRoomLocation> potentialRoomLocations = new List<PotentialRoomLocation>();
-
-		for (int i = -tilemapWidth / 2; i < tilemapWidth / 2; i++)
-		{
-			for (int j = chunkLowerY; j < chunkUpperY; j++)
-			{
-				groundTilemap.SetTile(new Vector3Int(i, j, 0), groundTile);
-
-				Vector2 thisTilePosition = groundTilemap.GetCellCenterWorld(new Vector3Int(i, j, 0));
-
-				float inputX = 0.5f + i / (float)tilemapWidth;
-				float inputY = ((j + chunkHeight / 2) % chunkHeight) / (float)chunkHeight;
-
-				float offset = nextChunkY / chunkHeight;
-
-				float noiseResult = 
-					Mathf.PerlinNoise(inputX * noiseXScale, (inputY * noiseYScale) + randomSeed + offset * noiseYScale);
-				// Debug.Log("noise input " + inputX + ", " + inputY + ", noise result: " + noiseResult);
-				if (noiseResult >= addTileNoiseOutputThreshold && noiseResult <= potentialRoomLocationThreshold)
-				{
-					// Debug.Log("hmmmm");
-					terrainRoofTilemap.SetTile(new Vector3Int(i, j, 0), dirtRoofTile);
-					terrainTilemap.SetTile(new Vector3Int(i, j, 0), dirtTile);
-				}
-				else if (noiseResult >= potentialRoomLocationThreshold && noiseResult <= potentialRoomLocationThreshold + fleshTileSpawnRange)
-				{
-					if (!terrainTilemap.HasTile(new Vector3Int(i, j - 1, 0)))
-					{
-						terrainRoofTilemap.SetTile(new Vector3Int(i, j, 0), fleshRoofTile);
-						terrainTilemap.SetTile(new Vector3Int(i, j, 0), fleshTile);
-					}
-				}
-				else
-				{
-					// bool willSpawnSkellyHere = false;
-					if (!terrainTilemap.HasTile(new Vector3Int(i, j - 1, 0)))
-					{
-						float skellyRandomPercent = Random.Range(0f, 1f);
-						float caveBatRandomPercent = Random.Range(0f, 1f);
-
-						if (skellyRandomPercent <= skellySpawnRate)
-						{
-							Instantiate(skellyPrefab, thisTilePosition, Quaternion.identity);
-						}
-						if (caveBatRandomPercent <= caveBatSpawnRate)
-						{
-							Instantiate(caveBatPrefab, thisTilePosition, Quaternion.identity);
-						}
-					}
-				}
-
-				if (noiseResult >= potentialRoomLocationThreshold)
-				{
-					// terrainTilemap.SetTile(new Vector3Int(i, j, 0), potentialRoomLocationTile);
-					// tilemapManager.RemoveTile()
-					// PotentialRoomLocation potentialLocation = new PotentialRoomLocation(new Vector3Int(i, j, 0), noiseResult);
-
-					// potentialRoomLocations.Add(potentialLocation);
-				}
-			}
-		}
-		
-		potentialRoomLocations.Sort(potentialRoomLocationComparer);
-
-		// TrySpawnRoom(potentialRoomLocations);
-
-		nextChunkY += chunkHeight;
-		// noiseShiftX += 1 / (float)tilemapWidth;
-	}
-
-/*	private void TrySpawnRoom(List<PotentialRoomLocation> potentialRoomLocations)
-	{
-		for (int i = 0; i < potentialRoomLocations.Count; i++)
-		{
-			if (!ConfirmedRoomExistsNearby(potentialRoomLocations[i].gridPosition))
-			{
-
-				terrainTilemap.SetTile(potentialRoomLocations[i].gridPosition, roomCenterConfirmedTile);
-				generatedRooms.Add(potentialRoomLocations[i].gridPosition, roomCenterConfirmedTile);
-				Debug.Log("Room successfully generated. Current room count: " + generatedRooms.Count);
-				// return;
-			}
-		}
-	}*/
-
-	private bool ConfirmedRoomExistsNearby(Vector3Int positionToCheck)
-	{
-		bool confirmedRoomExistsNearby = false;
-		int xMin = positionToCheck.x - minimumDistanceBetweenRooms;
-		int xMax = positionToCheck.x + minimumDistanceBetweenRooms;
-		int yMin = positionToCheck.y - minimumDistanceBetweenRooms;
-		int yMax = positionToCheck.y + minimumDistanceBetweenRooms;
-
-		for (int i = xMin; i < xMax; i++)
-		{
-			for (int j = yMin; j < yMax; j++)
-			{
-				if (generatedRooms.ContainsKey(new Vector3Int(i, j, 0)))
-				{
-					// Debug.Log("Attempted to generate room but room already existed nearby");
-					// Debug.Log(generatedRooms.Count);
-					return true;
-				}
-			}
-		}
-
-		return confirmedRoomExistsNearby;
 	}
 
 	public struct PotentialRoomLocation

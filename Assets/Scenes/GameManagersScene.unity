@@ -287,6 +287,8 @@ GameObject:
   - component: {fileID: 870761007}
   - component: {fileID: 870761006}
   - component: {fileID: 870761008}
+  - component: {fileID: 870761009}
+  - component: {fileID: 870761010}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -341,6 +343,62 @@ MonoBehaviour:
       - m_Target: {fileID: 870761006}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: OnGameplaySceneLoadCompleted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &870761009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870761005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 139aab2cd8b14f0459828434a40e31f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intEvent: {fileID: 11400000, guid: 661bcac1c09d451468f4ec5d926e0c24, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 870761006}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnGameEndZoneReached
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &870761010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870761005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e11a55cb7cce42f409ff6781e35059c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 9e82e856b5ada454db22c8386cc6bdad, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 870761006}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnPlayerDeath
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -426,7 +484,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &2118825081
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -631,6 +689,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2266014349268115881, guid: f697617c3d092de4482c6bd02c88fa3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2421756094403802754, guid: f697617c3d092de4482c6bd02c88fa3a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2421756094403802754, guid: f697617c3d092de4482c6bd02c88fa3a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2421756094403802754, guid: f697617c3d092de4482c6bd02c88fa3a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2421756094403802754, guid: f697617c3d092de4482c6bd02c88fa3a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2421756094403802754, guid: f697617c3d092de4482c6bd02c88fa3a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2421756094403802754, guid: f697617c3d092de4482c6bd02c88fa3a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3604534163388707570, guid: f697617c3d092de4482c6bd02c88fa3a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3604534163388707570, guid: f697617c3d092de4482c6bd02c88fa3a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3604534163388707570, guid: f697617c3d092de4482c6bd02c88fa3a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3604534163388707570, guid: f697617c3d092de4482c6bd02c88fa3a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3604534163388707570, guid: f697617c3d092de4482c6bd02c88fa3a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3604534163388707570, guid: f697617c3d092de4482c6bd02c88fa3a, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5747061800602276907, guid: f697617c3d092de4482c6bd02c88fa3a, type: 3}

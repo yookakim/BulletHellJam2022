@@ -9,11 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7058060f696e2ad47b8bac14ac87673f, type: 3}
-  m_Name: StarterPickaxe
+  m_Script: {fileID: 11500000, guid: 51ffd4614c4e925478abc7022c8b4991, type: 3}
+  m_Name: PlayerDiedEvent
   m_EditorClassIdentifier: 
-  meleeAttackPrefab: {fileID: 8721755205495771176, guid: 130ad4a4cf19550429b10f9c0f520e89, type: 3}
-  useRate: 2
-  meleeDamage: 5
-  alignment: 0
-  knockbackForce: 0

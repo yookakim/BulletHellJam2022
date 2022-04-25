@@ -36,6 +36,9 @@ public class Player : MonoBehaviour
 	[SerializeField] private IntEvent coinAmountChangedEvent;
 	[SerializeField] private GameObjectEvent interactableEnteredEvent;
 	[SerializeField] private GameEvent interactableExitedEvent;
+	[SerializeField] private GameObjectEvent gameEndZoneReachedEvent;
+	[SerializeField] private GameEvent playerDiedEvent;
+
 	public SoundEffectData coinPickupSound;
 
 	private PlayerInputController inputController;
@@ -161,6 +164,7 @@ public class Player : MonoBehaviour
 		// put player into dead state later
 		entityTweenFX.CancelAllTweens();
 		weaponController.CancelTweens();
+		playerDiedEvent.Raise();
 		Time.timeScale = 0;
 	}
 
@@ -208,6 +212,14 @@ public class Player : MonoBehaviour
 		if (interactable != null)
 		{
 			CurrentlyInteractedWith = interactable;
+		}
+
+		GameEndZone gameEndZone = objectHitBy.GetComponent<GameEndZone>();
+
+		if (gameEndZone != null)
+		{
+			// emit end game event or something
+			gameEndZoneReachedEvent.Raise(gameObject);
 		}
 	}
 }

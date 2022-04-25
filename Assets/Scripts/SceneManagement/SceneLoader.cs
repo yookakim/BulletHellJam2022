@@ -19,6 +19,7 @@ public class SceneLoader : MonoBehaviour
 	private SceneDataSO currentSceneData; // could either be the MainMenu or the GameplayScene
 	private SceneInstance gameplayManagersSceneInstance = new SceneInstance();
 
+	private AsyncOperationHandle<SceneInstance> _loadingOperationHandle;
 	private AsyncOperationHandle<SceneInstance> gameManagersSceneLoadingHandle;
 
 	public void OnMenuSceneLoadRequested()
@@ -63,7 +64,7 @@ public class SceneLoader : MonoBehaviour
 	{
 		// GameManagers scene completely loaded at this point
 
-
+		gameplayManagersSceneInstance = gameManagersSceneLoadingHandle.Result;
 		UnloadCurrentScene(); // unloads the Main Menu
 	}
 
@@ -73,16 +74,38 @@ public class SceneLoader : MonoBehaviour
 		{
 			if (currentSceneData.sceneReference.OperationHandle.IsValid())
 			{
-				currentSceneData.sceneReference.UnLoadScene();
+				Debug.Log("scene to load: " + sceneToLoad.sceneReference);
+				Debug.Log("unloading scene " + currentSceneData.sceneReference);
+				if (ReferenceEquals(sceneToLoad, currentSceneData))
+				{
+					// SceneManager.UnloadSceneAsync(_loadingOperationHandle.Result.Scene);
+					Addressables.UnloadSceneAsync(_loadingOperationHandle).Completed += Blah;
+					// SceneManager.LoadSceneAsync(_loadingOperationHandle.Result.Scene.name);
+					// _loadingOperationHandle = currentSceneData.sceneReference.LoadSceneAsync(LoadSceneMode.Additive, true);
+					// _loadingOperationHandle.Completed += OnNewSceneLoaded;
+				}
+				else
+				{
+					currentSceneData.sceneReference.UnLoadScene();
+					LoadNewScene();
+				}
 			}
 		}
+		else
+		{
+			LoadNewScene();
+		}
+	}
 
+	private void Blah(AsyncOperationHandle<SceneInstance> getMeOut)
+	{
 		LoadNewScene();
 	}
 
 	private void LoadNewScene()
 	{
-		sceneToLoad.sceneReference.LoadSceneAsync(LoadSceneMode.Additive, true).Completed += OnNewSceneLoaded;
+		_loadingOperationHandle = sceneToLoad.sceneReference.LoadSceneAsync(LoadSceneMode.Additive, true);
+		_loadingOperationHandle.Completed += OnNewSceneLoaded;
 	}
 
 	private void OnNewSceneLoaded(AsyncOperationHandle<SceneInstance> obj)

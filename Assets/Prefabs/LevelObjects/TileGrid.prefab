@@ -481,6 +481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemapWidth: 18
   chunkHeight: 16
+  finalGoalChunk: 3
   noiseXScale: 2
   noiseYScale: 2
   offsetMultiplier: 0.010101011
@@ -488,8 +489,8 @@ MonoBehaviour:
   addTileNoiseOutputThreshold: 0.45
   potentialRoomLocationThreshold: 0.7
   fleshTileSpawnRange: 0
-  dungeonSpawnFrequencyChunks: 6
-  molechantSpawnFrequencyChunks: 8
+  dungeonSpawnFrequencyChunks: 7
+  molechantSpawnFrequencyChunks: 9
   fleshRoomSpawnChance: 0.25
   startFleshRoomSpawningAtChunkNumber: 10
   skellySpawnRate: 0.012
@@ -512,9 +513,12 @@ MonoBehaviour:
   terrainRoofTilemap: {fileID: 791126957214950180}
   groundTilemap: {fileID: 791126958667581312}
   terrainTilemap: {fileID: 791126957900145885}
+  startingAreaPrefab: {fileID: 5439050297745203531, guid: d980fde0586df8d44a42ac0323565611, type: 3}
   molechantAreaPrefab: {fileID: 3206822553413925708, guid: c313849636fb92d46a35a75cab198fac, type: 3}
   dungeonPrefab: {fileID: 2940909478714555558, guid: 646ef74300867e841ad3a6f934c5af05, type: 3}
   fleshRoomPrefab: {fileID: 8280747935157338327, guid: e1ae913514f313f43856d6428fa6a10e, type: 3}
+  finalGoalChunkPrefab: {fileID: 1573420801408526490, guid: 7f7bc88c52849b345b95e593c997387b, type: 3}
+  fullDirtChunkPrefab: {fileID: 989212339350292993, guid: c402baaaf4d635a4c9234700e87a04ae, type: 3}
   roomTilemapPrefab: {fileID: 5163201842031558623, guid: 4ba014ffb4553774abdf0fccb263d590, type: 3}
   testPlayerTransform: {fileID: 0}
 --- !u!114 &791126958350390445

@@ -520,7 +520,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 127464586}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 9.26, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -658,6 +658,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestInteractable
       objectReference: {fileID: 0}
+    - target: {fileID: 3235197106862307083, guid: 2853a5dc834ec504ab6ffdac15d91094, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2853a5dc834ec504ab6ffdac15d91094, type: 3}
 --- !u!1001 &440178237
@@ -715,6 +719,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestInteractable (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3235197106862307083, guid: 2853a5dc834ec504ab6ffdac15d91094, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2853a5dc834ec504ab6ffdac15d91094, type: 3}
 --- !u!1 &455440270
@@ -751,7 +759,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.65
+  m_Intensity: 0.7
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -820,7 +828,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455440270}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.0688937, y: -2.188205, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -991,6 +999,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestShopItem
       objectReference: {fileID: 0}
+    - target: {fileID: 6462261664468512210, guid: da5b01e576cc00e4d8f7fbff799e139b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7037089440569299744, guid: da5b01e576cc00e4d8f7fbff799e139b, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1091,6 +1103,10 @@ PrefabInstance:
     - target: {fileID: 3235197106862307083, guid: 2853a5dc834ec504ab6ffdac15d91094, type: 3}
       propertyPath: m_Name
       value: TestInteractable (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235197106862307083, guid: 2853a5dc834ec504ab6ffdac15d91094, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2853a5dc834ec504ab6ffdac15d91094, type: 3}
@@ -1721,6 +1737,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestInteractable (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3235197106862307083, guid: 2853a5dc834ec504ab6ffdac15d91094, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2853a5dc834ec504ab6ffdac15d91094, type: 3}
 --- !u!1 &1071291933
@@ -2114,6 +2134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Molechant
       objectReference: {fileID: 0}
+    - target: {fileID: 997799248006055860, guid: b98906c8093e30c4b9e59fbcff5f19b3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3777023230845879261, guid: b98906c8093e30c4b9e59fbcff5f19b3, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2385,7 +2409,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594816168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -6.96, z: 0.042105436}
+  m_LocalPosition: {x: 0, y: -20.83, z: 0.042105436}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

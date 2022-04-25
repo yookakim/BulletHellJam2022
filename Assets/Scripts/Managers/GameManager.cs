@@ -30,7 +30,8 @@ public class GameManager : MonoBehaviour
 		LoadLevelState,
         PreGameState,
         InGameState,
-        PostGameState
+        VictoryState,
+		DefeatState
 	}
 
 	private GameState currentGameState;
@@ -41,6 +42,18 @@ public class GameManager : MonoBehaviour
 		Debug.Log("finished loading scene");
 		ChangeState(GameState.LoadLevelState);
 
+		Time.timeScale = 1;
+	}
+
+	public void OnGameEndZoneReached(GameObject playerObject)
+	{
+		// Debug.Log("player win");
+		ChangeState(GameState.VictoryState);
+	}
+
+	public void OnPlayerDeath()
+	{
+		ChangeState(GameState.DefeatState);
 	}
 
 	private void ChangeState(GameState newState)
