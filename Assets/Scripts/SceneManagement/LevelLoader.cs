@@ -41,6 +41,7 @@ public class LevelLoader : MonoBehaviour
 			tilemapGenerator.PlayerTransform = playerObject.transform;
 
 			cinemachine.Follow = playerObject.transform;
+			cinemachine.GetComponent<CinemachineCameraController>().PlayerTransform = playerObject.transform;
         }
     }
 }

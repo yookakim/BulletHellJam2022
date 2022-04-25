@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingWeaponData: {fileID: 11400000, guid: 3a416c9f80c9f0b4a989b176f721cff8, type: 2}
   weaponOwner: {fileID: 8589835605523327350}
+  fireSound: {fileID: 11400000, guid: 1df0a5270f5e27f4ea2fd2221b312cb4, type: 2}
 --- !u!1 &6009796609490791992
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,6 +417,7 @@ MonoBehaviour:
   coinAmountChangedEvent: {fileID: 11400000, guid: 41481adb23d7f2a4d9540ff1bfb9b542, type: 2}
   interactableEnteredEvent: {fileID: 11400000, guid: 49c7ba96fb8e15e4db5b5192335dba3e, type: 2}
   interactableExitedEvent: {fileID: 11400000, guid: cbd270be1665d8d458da54a9493c4327, type: 2}
+  coinPickupSound: {fileID: 11400000, guid: f7554a67e6eb5ca4f9eafbe9f91c515f, type: 2}
 --- !u!114 &8589835605523327347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,7 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b987dc5f1701c449f03d6fc212c5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 80
+  maxHealth: 16
 --- !u!114 &8589835605523327359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,7 +456,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312ac5099a71c944b9661832f46ec1c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchStrength: 20
   bombData: {fileID: 11400000, guid: 5e3f435c89701d4488669aeb8bc90ae8, type: 2}
   initialMaxBombCharges: 3
   initialChargeRate: 1

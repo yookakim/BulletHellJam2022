@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
 	[SerializeField] private IntEvent coinAmountChangedEvent;
 	[SerializeField] private GameObjectEvent interactableEnteredEvent;
 	[SerializeField] private GameEvent interactableExitedEvent;
+	public SoundEffectData coinPickupSound;
 
 	private PlayerInputController inputController;
 	private Movement movement;
@@ -142,10 +143,16 @@ public class Player : MonoBehaviour
 	public void OnShopItemPurchased(ShopItemData shopItem)
 	{
 		WeaponShopItemData weaponItem = shopItem as WeaponShopItemData;
+		BombShopItemData bombItem = shopItem as BombShopItemData;
 
 		if (weaponItem != null)
 		{
 			weaponController.SwapWeapon(weaponItem.weaponData);
+		}
+
+		if (bombItem != null)
+		{
+			bombLauncher.SwapBombType(bombItem.bombData);
 		}
 	}
 
@@ -193,6 +200,7 @@ public class Player : MonoBehaviour
 		{
 			CurrentCoinAmount++;
 			coin.OnPickup();
+			coinPickupSound.Play();
 		}
 
 		Interactable interactable = objectHitBy.GetComponent<Interactable>();

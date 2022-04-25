@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 055073ef9a003044e8161ca5a345ed8b, type: 3}
+  m_Name: ThrowableBombData
+  m_EditorClassIdentifier: 
+  bombPrefab: {fileID: 823305739645613985, guid: a2bdc9af73b8b6c47b59b3f3732fe988, type: 3}
+  damageAlignment: 0
+  hitsAllies: 1
+  damageAmount: 20
+  knockbackAmount: 0
+  bombLaunchStrength: 140
+  bombChargeTime: 4
+  bombExplosionRadius: 3
+  bombExplosionStrength: 1
+  friendlyDamageMultiplier: 0.25
+  bombEntityDamage: 20
+  bombTickDownTime: 3
+  timeToDestroyAfterExplosion: 1

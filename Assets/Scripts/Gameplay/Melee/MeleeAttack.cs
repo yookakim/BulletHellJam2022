@@ -11,6 +11,7 @@ public class MeleeAttack : MonoBehaviour
     [SerializeField] private DamageComponent damageComponent;
     [SerializeField] private float hitboxLifetime = 0.1f;
 	[SerializeField] private float objectLifetime = 0.25f;
+	public SoundEffectData terrainHitSound;
 
 	private float elapsedLifetime = 0f;
 	private Collider2D meleeHitbox;
@@ -38,6 +39,13 @@ public class MeleeAttack : MonoBehaviour
 		// pass own gameobject into hitbox right here
 		Hitbox hitbox = collision.gameObject.GetComponent<Hitbox>();
 		hitbox.TriggerHitbox(gameObject);
+
+		TerrainTile hitTerrain = collision.transform.parent.gameObject.GetComponent<TerrainTile>();
+
+		if (hitTerrain != null)
+		{
+			terrainHitSound.Play();
+		}
 	}
 
 	public void InitializeMeleeData(MeleeData meleeData)

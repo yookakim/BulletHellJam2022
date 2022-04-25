@@ -210,13 +210,13 @@ public class TilemapGenerator : MonoBehaviour
 								float scaledSkellySpawnChance = skellySpawnRate + skellySpawnRateChunkScalar * currentChunkNumber;
 								float skellySpawnThreshold = scaledSkellySpawnChance >= skellyMaxSpawnRate ? skellyMaxSpawnRate : scaledSkellySpawnChance;
 								float scaledCaveBatSpawnChance = caveBatSpawnRate + caveBatSpawnRateChunkScalar * currentChunkNumber;
-								float skellyCaveBatThreshold = scaledCaveBatSpawnChance >= caveBatMaxSpawnRate ? caveBatMaxSpawnRate : scaledCaveBatSpawnChance;
+								float caveBatThreshold = scaledCaveBatSpawnChance >= caveBatMaxSpawnRate ? caveBatMaxSpawnRate : scaledCaveBatSpawnChance;
 
 								if (skellyRandomPercent <= skellySpawnThreshold)
 								{
 									Instantiate(skellyPrefab, thisTilePosition, Quaternion.identity);
 								}
-								if (caveBatRandomPercent <= skellyCaveBatThreshold)
+								if (caveBatRandomPercent <= caveBatThreshold)
 								{
 									Instantiate(caveBatPrefab, thisTilePosition, Quaternion.identity);
 								}

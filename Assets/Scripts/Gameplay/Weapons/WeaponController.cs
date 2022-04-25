@@ -16,6 +16,8 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private WeaponData startingWeaponData;
 	[SerializeField] private GameObject weaponOwner;
 
+	public SoundEffectData fireSound;
+
     private float timeLastUsed;
 
 	private void Awake()
@@ -55,6 +57,7 @@ public class WeaponController : MonoBehaviour
 	{
 		CanUse = false;
 		CustomEvent.Trigger(gameObject, "WeaponUsed");
+		fireSound?.Play();
 		CurrentWeapon.UseWeapon(this);
 	}
 

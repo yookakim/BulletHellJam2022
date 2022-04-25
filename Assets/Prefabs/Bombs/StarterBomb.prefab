@@ -161,6 +161,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   flashStartTimeBeforeExplosion: 0.75
+  fuseSound: {fileID: 11400000, guid: 2a58cf802c3c83e478dd2ccdd7b51e5f, type: 2}
+  bombExplosionSound: {fileID: 11400000, guid: 912a9d29c429a104996bc6e861e27080, type: 2}
 --- !u!50 &169374601995178532
 Rigidbody2D:
   serializedVersion: 4

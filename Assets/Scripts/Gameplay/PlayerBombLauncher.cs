@@ -11,7 +11,6 @@ public class PlayerBombLauncher : MonoBehaviour
 	public int MaxBombCharges { get => maxBombCharges; }
 	public bool IsFull { get => bombCharges.Count == maxBombCharges; }
 
-	[SerializeField] private float launchStrength;
 	[SerializeField] private BombData bombData;
 	[SerializeField] private int initialMaxBombCharges;
 	[SerializeField] private int initialChargeRate;
@@ -58,12 +57,17 @@ public class PlayerBombLauncher : MonoBehaviour
 			Vector2 launchDirection = (targetPosition - (Vector2)transform.position).normalized;
 			GameObject instantiatedBomb = Instantiate(bombData.bombPrefab, transform.position, Quaternion.identity);
 
-			instantiatedBomb.GetComponent<Rigidbody2D>().AddForce(launchDirection * launchStrength, ForceMode2D.Impulse);
+			instantiatedBomb.GetComponent<Rigidbody2D>().AddForce(launchDirection * bombData.bombLaunchStrength, ForceMode2D.Impulse);
 
 			bombLauncherLoadedEvent.Raise(gameObject);
 		}
 	}
 
-	// Data needed for bomb charges system:
-	// Max bomb charges count, current 
+	public void SwapBombType(BombData bombData)
+	{
+		this.bombData = bombData;
+		bombCharges.Clear();
+		currentChargeAmount = 0;
+		bombLauncherLoadedEvent.Raise(gameObject);
+	}
 }

@@ -13,8 +13,5 @@ MonoBehaviour:
   m_Name: ShopItemMasterList
   m_EditorClassIdentifier: 
   masterList:
-  - {fileID: 11400000, guid: 888637d05ec10784bbc53897ac5d66cd, type: 2}
-  - {fileID: 11400000, guid: 3ab67bb86ba306c45a8f9c3564876fb8, type: 2}
-  - {fileID: 11400000, guid: d0571863a8fafce47ab82d8e17e7ec05, type: 2}
-  - {fileID: 11400000, guid: f5e233c755ea22945bc7f2a4da49e448, type: 2}
-  - {fileID: 11400000, guid: 7c725ea610cb3984684195505ce2b613, type: 2}
+  - {fileID: 11400000, guid: ba4fe22cb0e136043a879df6e8b58aa2, type: 2}
+  - {fileID: 11400000, guid: bbeb92a5cef2fab48bb8d1e86f22e704, type: 2}

@@ -15,7 +15,10 @@ public class Bomb : MonoBehaviour
 	[SerializeField] private float bombFlashInterval;
 	[SerializeField] private AnimationCurve bombFlashCurve;
 	[SerializeField] private float flashStartTimeBeforeExplosion;
+	public SoundEffectData fuseSound;
+	public SoundEffectData bombExplosionSound;
 
+	private AudioSource fuseAudioSource;
 	private Rigidbody2D rb;
 	private SpriteRenderer sprite;
 	private DamageComponent damageComponent;
@@ -39,6 +42,11 @@ public class Bomb : MonoBehaviour
 
 		hitboxMask = LayerMask.GetMask("Hitbox");
 		timeRemaining = bombData.bombTickDownTime;
+	}
+
+	private void Start()
+	{
+		fuseAudioSource = fuseSound?.Play();
 	}
 
 	private void Update()
@@ -72,6 +80,9 @@ public class Bomb : MonoBehaviour
 			0f,
 			hitboxMask
 		);
+
+		fuseAudioSource?.Stop();
+		bombExplosionSound.Play();
 
 		for (int i = 0; i < hitByExplosion.Length; i++)
 		{

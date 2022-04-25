@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: BatEcholocation
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 6435513250006416299, guid: 8f1ca33d603286f4da6e5e79231450ff, type: 3}
-  useRate: 1.4
-  launchForce: 4
+  useRate: 1
+  allowsHoldFire: 0
+  launchForce: 3.5
   clusterAccuracyDeviation: 10
   individualAccuracyDeviation: 0
   directionFacesTarget: 1
   clusterAmount: 3
-  clusterSpreadAngleInDegrees: 35
+  clusterSpreadAngleInDegrees: 40
   spawnDistanceFromWeapon: 0

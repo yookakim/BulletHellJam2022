@@ -12,6 +12,7 @@ public class BombData : ScriptableObject
     public int damageAmount;
     public float knockbackAmount;
     [Space]
+    public float bombLaunchStrength;
     public float bombChargeTime;
     public float bombExplosionRadius;
     public float bombExplosionStrength;

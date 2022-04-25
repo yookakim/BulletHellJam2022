@@ -488,14 +488,14 @@ MonoBehaviour:
   addTileNoiseOutputThreshold: 0.45
   potentialRoomLocationThreshold: 0.7
   fleshTileSpawnRange: 0
-  dungeonSpawnFrequencyChunks: 7
-  molechantSpawnFrequencyChunks: 10
-  fleshRoomSpawnChance: 0.2
-  startFleshRoomSpawningAtChunkNumber: 6
-  skellySpawnRate: 0.015
+  dungeonSpawnFrequencyChunks: 6
+  molechantSpawnFrequencyChunks: 8
+  fleshRoomSpawnChance: 0.25
+  startFleshRoomSpawningAtChunkNumber: 10
+  skellySpawnRate: 0.012
   skellySpawnRateChunkScalar: 0.001
   skellyMaxSpawnRate: 0.05
-  caveBatSpawnRate: 0.008
+  caveBatSpawnRate: 0.006
   caveBatSpawnRateChunkScalar: 0.001
   caveBatMaxSpawnRate: 0.05
   skellyPrefab: {fileID: 6803426168261079972, guid: 4598aadbc1525524597dfa8882c747a9, type: 3}

@@ -298,19 +298,19 @@ MonoBehaviour:
   entityStatusEffects: {fileID: 2123895982578609355}
   rb: {fileID: 4704752586227310896}
   coinSpawner: {fileID: 7473301440086845379}
-  coinsDropped: 120
+  coinsDropped: 15
   timeAfterDeathBeforeDestroy: 1.2
   entityMass: 5
-  knockbackForceOnDeath: 0
+  knockbackForceOnDeath: 60
   playerTargetTransform: {fileID: 11400000, guid: f11283cdff44a724ab52be0d8f04fb5b, type: 2}
   playerScanRaycast: {fileID: 4133744691020497599}
   necromancerAttacks:
   - {fileID: 5907875416897876250}
-  idleToOneTransitionTime: 2
-  phaseOneTimeLength: 7
-  oneToTwoTransitionTime: 3
+  idleToOneTransitionTime: 3
+  phaseOneTimeLength: 5
+  oneToTwoTransitionTime: 2
   phaseTwoTimeLength: 5
-  twoToOneTransitionTime: 5
+  twoToOneTransitionTime: 2
   phaseOneAttackAngleRange: 0
   fireMinionPrefab: {fileID: 6803426168261079972, guid: f2f381475fd70ff488fb62b5e45149c8, type: 3}
   fireMinionSpawnInterval: 0.3
@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b987dc5f1701c449f03d6fc212c5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 180
 --- !u!114 &5246072126135989320
 MonoBehaviour:
   m_ObjectHideFlags: 0

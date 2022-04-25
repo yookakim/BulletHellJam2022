@@ -17,6 +17,7 @@ MonoBehaviour:
   hitsAllies: 1
   damageAmount: 20
   knockbackAmount: 0
+  bombLaunchStrength: 20
   bombChargeTime: 4
   bombExplosionRadius: 3
   bombExplosionStrength: 1

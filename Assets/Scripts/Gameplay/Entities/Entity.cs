@@ -18,7 +18,8 @@ public class Entity : MonoBehaviour
 	[SerializeField] protected float timeAfterDeathBeforeDestroy;
 	[SerializeField] protected float entityMass;
 	[SerializeField] protected float knockbackForceOnDeath;
-
+	public SoundEffectData hurtSound;
+	public SoundEffectData deathSound;
 	public float EntityMass { get => entityMass; }
 	public float TimeAfterDeathBeforeDestroy { get => timeAfterDeathBeforeDestroy; }
 	public float ElapsedTimeAfterDeath { get; set; }
@@ -64,7 +65,7 @@ public class Entity : MonoBehaviour
 						directionOfAttackHitBy = rbHitBy.velocity.normalized;
 					}
 				}
-
+				hurtSound?.Play();
 				health.DealDamage(incomingDamageComponent.DamageAmount);
 			}
 		}
@@ -78,6 +79,7 @@ public class Entity : MonoBehaviour
 		rb.AddForce(directionOfAttackHitBy * knockbackForceOnDeath, ForceMode2D.Impulse);
 		sprite.color = entityDeadColor;
 		hitbox.gameObject.SetActive(false);
+		deathSound?.Play();
 		// GetComponent<Collider2D>().enabled = false;
 	}
 

@@ -8,7 +8,28 @@ public class DungeonWallTile : TerrainTile
 
 	protected override void OnHealthChanged(Health healthComponent, int damageAmountDealt)
 	{
-		
+		if (healthComponent.CurrentHealth / (float)healthComponent.MaxHealth >= 0.75)
+		{
+			tileBreakSpriteRenderer.sprite = null;
+			tileBreakSpriteRendererRoof.sprite = null;
+		}
+		else if (healthComponent.CurrentHealth / (float)healthComponent.MaxHealth >= 0.50 &&
+			healthComponent.CurrentHealth / (float)healthComponent.MaxHealth < 0.75)
+		{
+			tileBreakSpriteRenderer.sprite = tileBreakSprites[0];
+			tileBreakSpriteRendererRoof.sprite = tileBreakSprites[0];
+		}
+		else if (healthComponent.CurrentHealth / (float)healthComponent.MaxHealth >= 0.25 &&
+			healthComponent.CurrentHealth / (float)healthComponent.MaxHealth < 0.50)
+		{
+			tileBreakSpriteRenderer.sprite = tileBreakSprites[1];
+			tileBreakSpriteRendererRoof.sprite = tileBreakSprites[1];
+		}
+		else
+		{
+			tileBreakSpriteRenderer.sprite = tileBreakSprites[2];
+			tileBreakSpriteRendererRoof.sprite = tileBreakSprites[2];
+		}
 	}
 
 	protected override void OnHealthZero(GameObject tileObject)
